@@ -1,0 +1,59 @@
+.app-card.mdl-card {
+  min-height: initial;
+}
+
+.app-card {
+  a:link {
+    text-decoration: none;
+  }
+
+  .mdl-card__supporting-text {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .mdl-card__title-text {
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .detalhes-app {
+    padding-left: 5px;
+  }
+
+  .detalhes-app li {
+    list-style-type: none;
+  }
+
+  .status-down {
+    background-color: rgb(244,67,54);
+  }
+
+  .status-up {
+    background-color: rgb(0,150,136);
+  }
+
+  .status-undefined {
+    background-color: #999;
+  }
+
+  .status-timeout {
+    background-color: #ccc;
+  }
+
+  .app-rodape {
+      font-size: 11px;
+      color: grey;
+      letter-spacing: 0.2px;
+  }
+
+  .mdl-card__menu {
+    color: #fff;
+    font-size: 80%;
+    top: 10px;
+
+    .material-icons {
+      font-size: 20px;
+    }
+  }
+}

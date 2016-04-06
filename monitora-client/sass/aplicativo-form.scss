@@ -1,0 +1,15 @@
+.aplicativo-form {
+  position: absolute;
+  bottom: 10px;
+  margin-left: 20px;
+
+  .esconde {
+    display: none;
+  }
+
+  .acao-incluir {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
+}
