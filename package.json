@@ -1,0 +1,17 @@
+{
+  "name": "monitora-server",
+  "version": "1.0.0",
+  "description": "backend do serviço de monitoração",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felipe Reis",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^2.4.2",
+    "lodash": "^4.8.2",
+    "moment": "^2.12.0",
+    "request": "^2.70.0"
+  }
+}
