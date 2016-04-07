@@ -6,6 +6,7 @@ module.exports = ChecaAplicativo = function (aplicativoJson) {
 }
 
 ChecaAplicativo.prototype.TIMEOUT = 3000;
+ChecaAplicativo.prototype.DOWN_COUNT = 10;
 
 ChecaAplicativo.prototype.urlFinal = function() {
     if(this.data.nome == 'Populis II') {
@@ -18,8 +19,6 @@ ChecaAplicativo.prototype.urlFinal = function() {
 ChecaAplicativo.prototype.checaStatus = function (callback) {
   var urlFinal = this.urlFinal();
 
-  console.log('checando url', urlFinal);
-
   return request({
     url: urlFinal,
     timeout: this.TIMEOUT
@@ -27,46 +26,63 @@ ChecaAplicativo.prototype.checaStatus = function (callback) {
 
     this.data.statusAnterior = this.data.status || 'unknow';
 
+    var houveAtualizacao;
+
     if(error && error.code == 'ETIMEDOUT') {
-      this._handleTimeout();
+      houveAtualizacao = this._handleError(error, response);
     } else if(response && response.statusCode === 200) {
-      this._handleSucesso(body, response);
+      houveAtualizacao = this._handleSucesso(body, response);
     } else {
-      this._handleError(error, response);
+      houveAtualizacao = this._handleError(error, response);
     }
 
-    // Verifica se houve mudança no status
-    if(this.data.statusAnterior !== this.data.status) {
-      this.data.desde = moment().format("DD/MM/YYYY HH:mm");
-
-      if(this.data.status == 'up') {
-        this.data.ultimaAlteracao = 'subiu';
-      } else {
-        this.data.ultimaAlteracao = 'caiu';
-      }
-    }
-
-    callback.bind(this)();
+    callback.bind(this)(houveAtualizacao);
 
   }.bind(this));
 }
 
 ChecaAplicativo.prototype._handleError = function(error, response) {
-  this.data.status = 'down';
-  this.data.statusCode = response ? response.statusCode : null;
+  if(this.data.statusAnterior == 'up' || this.data.statusAnterior == 'unknow') {
+    this.data.errorCount = 1;
+    this.data.desde = moment().format("DD/MM/YYYY HH:mm");
+    this.data.status = 'unstable';
+
+    console.log('atualizou, unstable', this.data.nome, this.data.cliente);
+    return true;
+  } else {
+    if(this.data.errorCount > 6) {
+      return false;
+    } else if(this.data.errorCount == 6) {
+      this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
+      this.data.status = 'down';
+      this.data.desde = moment().format("DD/MM/YYYY HH:mm");
+      this.data.ultimaAlteracao = 'caiu';
+
+      console.log('atualizou, caiu', this.data.nome, this.data.cliente);
+      return true;
+    } else {
+      this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
+
+      return true;  
+    }
+  }
+
+  this.data.errorCode = response ? response.statusCode : null;
 };
 
 ChecaAplicativo.prototype._handleSucesso = function(body, response) {
-  this.data.status = 'up';
-  this.data.statusCode = response.statusCode;
-
   if(this.data.nome == 'Populis II') {
     this.data.detalhesPop2 = eval('(' + body + ')');;
   }
-};
 
-ChecaAplicativo.prototype._handleTimeout = function() {
-  this.data.status = 'timeout';
-  this.data.statusCode = null;
-  console.log('timeout');
+  if(this.data.statusAnterior != 'up') {
+    this.data.status = 'up';
+    this.data.desde = moment().format("DD/MM/YYYY HH:mm");
+    this.data.ultimaAlteracao = 'subiu';
+
+    console.log('atualizou, subiu', this.data.nome, this.data.cliente);
+    return true;
+  } else {
+    return false;
+  }
 };
