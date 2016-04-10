@@ -18,13 +18,12 @@ aplicativosRef.once('value', function(snap) {
         delete aplicativos[key][key2];
       }
     }
+
+    // salva no node aplicativos-backup
+    aplicativosBackupRef.child(aplicativos[key].cliente + '_' + aplicativos[key].nome).set(aplicativos[key]);
+
   }
 
   // escreve em arquivo
   fs.writeFile('aplicativos-backup_' + moment().format('YYYYMMDDHHmmSS') + '.json', JSON.stringify(aplicativos));
-
-  // salva no node aplicativos-backup
-  aplicativosBackupRef.set(aplicativos, function() {
-    process.exit();
-  });
 });

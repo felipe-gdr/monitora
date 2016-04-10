@@ -9,22 +9,32 @@ module.exports = React.createClass({
         <div className="mdl-layout-spacer"></div>
         <nav className="mdl-navigation">
           <a className="mdl-navigation__link qtde-up" href="">
-            12
+            {this.qtdeUp()}
             <label className="mdl-button mdl-js-button mdl-button--icon"
              htmlFor="fixed-header-drawer-exp">
               <i className="material-icons">arrow_upward</i>
             </label>
           </a>
           <a className="mdl-navigation__link qtde-down" href="">
-            3
+            {this.qtdeDown()}
             <label className="mdl-button mdl-js-button mdl-button--icon"
              htmlFor="fixed-header-drawer-exp">
               <i className="material-icons">arrow_downward</i>
             </label>
           </a>
-          <Mensagens />
+          {/*<Mensagens eventos={this.props.eventos} />*/}
         </nav>
       </div>
     </header>
+  },
+  qtdeUp: function() {
+      return this.props.aplicativos.filter(function(aplicativo) {
+        return aplicativo.status == 'up';
+      }).length;
+  },
+  qtdeDown: function() {
+      return this.props.aplicativos.filter(function(aplicativo) {
+        return aplicativo.status != 'up';
+      }).length;
   }
 });

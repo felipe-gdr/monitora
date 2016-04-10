@@ -5,7 +5,7 @@ module.exports = React.createClass({
     return (
       <div className="mdl-textfield mdl-js-textfield">
         <input
-          className="mdl-textfield__input"
+          className={"mdl-textfield__input " + this.props.className}
           type="text"
           id="sample1"
           onChange={this.handleInputChanged}/>

@@ -1,8 +1,18 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  getInitialState: function () {
+    return {
+      hovering: false
+    }
+  },
   render: function () {
-    return <div className="mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone app-card mdl-card mdl-shadow--2dp">
+    var classes = "mdl-cell mdl-cell--2-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone app-card mdl-card mdl-shadow--2dp" + (this.state.hovering ? ' ativo' : '');
+
+    return <div
+        className={classes}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}>
       <a href="#">
         <div className={"status-" + this.props.status + " mdl-card__title"}>
             <h4 className="mdl-card__title-text">{this.props.cliente + " : " + this.props.nome}</h4>
@@ -44,5 +54,15 @@ module.exports = React.createClass({
     } else {
       return "";
     }
+  },
+  handleMouseEnter: function() {
+    this.setState({
+      hovering: true
+    });
+  },
+  handleMouseLeave: function() {
+    this.setState({
+      hovering: false
+    });
   }
 });

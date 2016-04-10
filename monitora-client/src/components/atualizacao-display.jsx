@@ -12,10 +12,8 @@ module.exports = React.createClass({
       return <div>desconhecido</div>;
     }
 
-    console.log(new Moment(this.props.dataUltimaAtualizacao).fromNow());
-
-    return <div>
-      {new Moment(this.props.dataUltimaAtualizacao).fromNow()}
+    return <div className="atualizacao-display">
+      Última atualização: {new Moment(this.props.dataUltimaAtualizacao).fromNow()}
     </div>
 
   }

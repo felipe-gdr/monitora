@@ -1,5 +1,7 @@
 var Firebase = require('firebase');
 var _ = require('lodash');
+var moment = require('moment');
+
 var ChecaAplicativo = require('./checa-aplicativo');
 
 var monitoraRef = new Firebase('https://monitora.firebaseio.com/')
@@ -9,7 +11,6 @@ var eventosRef = monitoraRef.child('eventos');
 var INTERVALO_EXECUCAO = 5000;
 
 var checaTodosOsAplicativos = function () {
-  console.log('executando ....');
   aplicativosRef.once('value', function(snap) {
     var aplicativos = snap.val();
 
@@ -17,9 +18,15 @@ var checaTodosOsAplicativos = function () {
       var aplicativo = aplicativos[key];
       aplicativo.key = key;
 
-      new ChecaAplicativo(aplicativo).checaStatus(function(houveAtualizacao) {
-        if(houveAtualizacao) {
+      new ChecaAplicativo(aplicativo).checaStatus(function(mensagem) {
+        if(mensagem) {
           aplicativosRef.child(this.data.key).set(this.data);
+
+          eventosRef.push({
+            aplicativoKey: this.data.key,
+            dataEvento: new Date(),
+            mensagem: mensagem
+          });
         }
       });
 

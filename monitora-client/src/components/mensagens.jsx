@@ -1,4 +1,6 @@
 var React = require('react');
+var Mensagem = require('./mensagem');
+var _ = require('lodash');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -13,7 +15,7 @@ module.exports = React.createClass({
         href="javascript:void(0)">
         <div
           className="material-icons mdl-badge mdl-badge--overlap"
-          data-badge="5">
+          data-badge={this.props.eventos.length}>
           message
         </div>
       </a>
@@ -21,29 +23,15 @@ module.exports = React.createClass({
     </div>
   },
   lista: function() {
+    var count = 0;
+    var eventos = this.props.eventos.splice(0, 10).map(function (evento){
+      return <Mensagem {...evento} key={count++}/>
+    });
+
     return <div className="mdl-shadow--2dp lista-mensagens">
       <ul>
-        <li className="nao-lida">
-          <span className="mensagem subiu">
-            <i className="material-icons">arrow_upward</i>
-            Advanta : Populis I subiu
-          </span>
-          <div className="horario">há 1 horas...</div>
-        </li>
-        <li>
-          <span className="mensagem caiu">
-            <i className="material-icons">arrow_downward</i>
-            Advanta : Populis I caiu
-          </span>
-          <div className="horario">há 1 horas...</div>
-        </li>
-        <li>
-          <span className="mensagem subiu">
-            <i className="material-icons">arrow_upward</i>
-            Advanta : Populis I subiu
-          </span>
-          <div className="horario">há 2 horas...</div>
-        </li>
+        {eventos}
+        {this.props.eventos.length > 10 ? <li>mais mensagens....</li> : null}
       </ul>
       <span className="rodape">Atualizado em 26/03/2016 18:14</span>
     </div>

@@ -21,7 +21,7 @@ module.exports = React.createClass({
         <TextField nome="Nome" onTextChanged={this.handleNomeChanged} />
         <TextField nome="Cliente" onTextChanged={this.handleClienteChanged} />
         <br />
-        <TextField nome="Url" onTextChanged={this.handleUrlChanged} />
+        <TextField nome="Url" onTextChanged={this.handleUrlChanged} className="input-grande" />
         <div className="acoes">
           <Botao
             icone="done"
@@ -88,7 +88,7 @@ module.exports = React.createClass({
     }));
   },
   handleClickSalvar: function () {
-    this.props.aplicativosStore.push(this.state.aplicativoInclusao);
+    this.props.aplicativosStore.child(this.state.aplicativoInclusao.cliente + '_' + this.state.aplicativoInclusao.nome).set(this.state.aplicativoInclusao);
   },
   handleClickToggleIncluir: function() {
     this.setState({

@@ -5,8 +5,12 @@ module.exports = ChecaAplicativo = function (aplicativoJson) {
   this.data = aplicativoJson;
 }
 
-ChecaAplicativo.prototype.TIMEOUT = 3000;
+ChecaAplicativo.prototype.TIMEOUT = 10000;
 ChecaAplicativo.prototype.DOWN_COUNT = 10;
+
+ChecaAplicativo.prototype.label = function () {
+  return this.data.cliente + " : " + this.data.nome;
+}
 
 ChecaAplicativo.prototype.urlFinal = function() {
     if(this.data.nome == 'Populis II') {
@@ -29,6 +33,7 @@ ChecaAplicativo.prototype.checaStatus = function (callback) {
     var houveAtualizacao;
 
     if(error && error.code == 'ETIMEDOUT') {
+      console.log('timeout', this.data.nome, this.data.cliente);
       houveAtualizacao = this._handleError(error, response);
     } else if(response && response.statusCode === 200) {
       houveAtualizacao = this._handleSucesso(body, response);
@@ -47,23 +52,21 @@ ChecaAplicativo.prototype._handleError = function(error, response) {
     this.data.desde = moment().format("DD/MM/YYYY HH:mm");
     this.data.status = 'unstable';
 
-    console.log('atualizou, unstable', this.data.nome, this.data.cliente);
-    return true;
+    return this.label() + " ficou instável";
   } else {
     if(this.data.errorCount > 6) {
-      return false;
+      return null;
     } else if(this.data.errorCount == 6) {
       this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
       this.data.status = 'down';
       this.data.desde = moment().format("DD/MM/YYYY HH:mm");
       this.data.ultimaAlteracao = 'caiu';
 
-      console.log('atualizou, caiu', this.data.nome, this.data.cliente);
-      return true;
+      return this.label() + " caiu";
     } else {
       this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
 
-      return true;  
+      return this.label() + " continua instável";
     }
   }
 
@@ -80,9 +83,8 @@ ChecaAplicativo.prototype._handleSucesso = function(body, response) {
     this.data.desde = moment().format("DD/MM/YYYY HH:mm");
     this.data.ultimaAlteracao = 'subiu';
 
-    console.log('atualizou, subiu', this.data.nome, this.data.cliente);
-    return true;
+    return this.label() + " subiu";
   } else {
-    return false;
+    return null;
   }
 };

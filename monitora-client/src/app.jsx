@@ -12,57 +12,79 @@ var Menu = require('./components/menu');
 var AplicativoForm = require('./components/aplicativo-form');
 var AtualizacaoDisplay = require('./components/atualizacao-display');
 
-
-
 // Url Firebase
 var rootUrl = 'https://monitora.firebaseio.com/';
+
+var eventosNovos = false;
 
 var Main = React.createClass({
   mixins: [ReactFire],
   getInitialState: function () {
     return {
         aplicativos: [],
+        eventos: [],
         mostraIncluir: false
     }
   },
   componentWillMount: function() {
-    this.fb = new Firebase(rootUrl + 'aplicativos/');
-    this.bindAsObject(this.fb, 'aplicativos');
-    this.fb.on('value', this.handleDataLoaded);
+    this.fbAplicativos = new Firebase(rootUrl + 'aplicativos/');
+    this.bindAsArray(this.fbAplicativos, 'aplicativos');
+
+    this.fbEventos = new Firebase(rootUrl + 'eventos/');
+    this.fbEventos.on('child_added', this.handleEventoLoaded);
+    this.fbEventos.once('value', this.setItensNovos);
   },
   render: function() {
     return  <div>
       <div className="mdl-layout mdl-js-layout">
-        <Header />
+        <Header eventos={this.state.eventos} aplicativos={this.state.aplicativos} />
         <main className="mdl-layout__content">
-          <AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>
+          {/*<AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>*/}
           <AplicativoForm aplicativosStore={this.firebaseRefs.aplicativos}/>
           <Grid aplicativos={this.state.aplicativos}/>
         </main>
-        <Menu />
+        {/*<Menu />*/}
+      </div>
+      <div id="notificacao" className="mdl-js-snackbar mdl-snackbar">
+        <div className="mdl-snackbar__text"></div>
+        <button className="mdl-snackbar__action" type="button"></button>
       </div>
     </div>
   },
-  handleDataLoaded: function (snap) {
-    var temErro = false;
+  setItensNovos: function(snap) {
+    eventosNovos = true;
+    //    this.setState({
+    //      eventos: _.values(snap.val()).reverse()
+    //    });
+  },
+  handleEventoLoaded: function (snap) {
+    if(!eventosNovos) return;
 
-    _.forIn(snap.val(), function(aplicativo) {
-      if(aplicativo.status == 'down') {
-        temErro = true;
-        return false;
-      }
+    var notificacaoContainer = document.querySelector('#notificacao');
+    var mensagem = snap.val().mensagem;
+
+    notificacaoContainer.MaterialSnackbar.showSnackbar({
+      message: mensagem
     });
 
-    if(temErro) {
+    if(mensagem.indexOf('caiu') > -1) {
       new Audio('./sounds/error.mp3').play();
-    } else {
+    } else if (mensagem.indexOf('subiu') > -1) {
       new Audio('./sounds/beep.mp3').play();
     }
 
     this.setState({
       dataUltimaAtualizacao: new Date()
     });
+
+    //var eventos = this.state.eventos;
+    //eventos.push(snap.val());
+
+    //this.setState({
+    //    eventos: eventos
+    //});
   }
+
 });
 
 var element = React.createElement(Main, {});
