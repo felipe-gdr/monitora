@@ -11,6 +11,7 @@ var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 
 var notify = function(error) {
+  console.log('erro', error);
   var message = 'In: ';
   var title = 'Error: ';
 
