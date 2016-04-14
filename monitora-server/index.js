@@ -24,7 +24,7 @@ var checaTodosOsAplicativos = function () {
 
           eventosRef.push({
             aplicativoKey: this.data.key,
-            dataEvento: new Date(),
+            dataEvento: new Date().getTime(),
             mensagem: mensagem
           });
         }

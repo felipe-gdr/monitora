@@ -16,6 +16,7 @@ var AtualizacaoDisplay = require('./components/atualizacao-display');
 var rootUrl = 'https://monitora.firebaseio.com/';
 
 var eventosNovos = false;
+var MAX_EVENTOS = 10;
 
 var Main = React.createClass({
   mixins: [ReactFire],
@@ -32,12 +33,13 @@ var Main = React.createClass({
 
     this.fbEventos = new Firebase(rootUrl + 'eventos/');
     this.fbEventos.on('child_added', this.handleEventoLoaded);
-    this.fbEventos.once('value', this.setItensNovos);
+    // realiza uma pesquisa para separar os eventos pré-existentes dos novos
+    this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
   },
   render: function() {
     return  <div>
       <div className="mdl-layout mdl-js-layout">
-        <Header eventos={this.state.eventos} aplicativos={this.state.aplicativos} />
+        <Header eventos={this.state.eventos} aplicativos={this.state.aplicativos} handleFechaMensagens={this.handleFechaMensagens} />
         <main className="mdl-layout__content">
           {/*<AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>*/}
           <AplicativoForm aplicativosStore={this.firebaseRefs.aplicativos}/>
@@ -53,9 +55,6 @@ var Main = React.createClass({
   },
   setItensNovos: function(snap) {
     eventosNovos = true;
-    //    this.setState({
-    //      eventos: _.values(snap.val()).reverse()
-    //    });
   },
   handleEventoLoaded: function (snap) {
     if(!eventosNovos) return;
@@ -77,12 +76,21 @@ var Main = React.createClass({
       dataUltimaAtualizacao: new Date()
     });
 
-    //var eventos = this.state.eventos;
-    //eventos.push(snap.val());
+    var eventos = this.state.eventos;
+    eventos.unshift(snap.val());
 
-    //this.setState({
-    //    eventos: eventos
-    //});
+    if(eventos.length > MAX_EVENTOS) {
+      eventos = _.initial(eventos);
+    }
+
+    this.setState({
+        eventos: eventos
+    });
+  },
+  handleFechaMensagens: function() {
+    this.setState({
+      eventos: []
+    });
   }
 
 });

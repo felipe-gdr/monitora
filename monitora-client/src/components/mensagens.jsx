@@ -24,21 +24,24 @@ module.exports = React.createClass({
   },
   lista: function() {
     var count = 0;
-    var eventos = this.props.eventos.splice(0, 10).map(function (evento){
+    var eventos = this.props.eventos.map(function (evento){
       return <Mensagem {...evento} key={count++}/>
     });
 
     return <div className="mdl-shadow--2dp lista-mensagens">
       <ul>
         {eventos}
-        {this.props.eventos.length > 10 ? <li>mais mensagens....</li> : null}
       </ul>
       <span className="rodape">Atualizado em 26/03/2016 18:14</span>
     </div>
   },
   handleClick: function () {
+    if(this.state.mostraLista) {
+      this.props.handleFechaMensagens();
+    }
+
     this.setState({
       mostraLista: !this.state.mostraLista
-    })
+    });
   }
 });

@@ -1,4 +1,5 @@
 var React = require('react');
+var moment = require('moment');
 
 module.exports = React.createClass({
   render: function() {
@@ -7,7 +8,7 @@ module.exports = React.createClass({
         <i className="material-icons">{this.icone()}</i>
         {this.props.mensagem}
       </span>
-      <div className="horario">{this.props.dataEvento}</div>
+      <div className="horario">{moment(this.props.dataEvento).format('DD/MM/YYYY HH:mm:ss')}</div>
     </li>
   },
   icone: function() {

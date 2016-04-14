@@ -22,7 +22,7 @@ module.exports = React.createClass({
               <i className="material-icons">arrow_downward</i>
             </label>
           </a>
-          {/*<Mensagens eventos={this.props.eventos} />*/}
+          <Mensagens eventos={this.props.eventos} handleFechaMensagens={this.props.handleFechaMensagens}/>
         </nav>
       </div>
     </header>
