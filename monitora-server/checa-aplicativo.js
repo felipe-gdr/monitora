@@ -6,7 +6,7 @@ module.exports = ChecaAplicativo = function (aplicativoJson) {
 }
 
 ChecaAplicativo.prototype.TIMEOUT = 10000;
-ChecaAplicativo.prototype.DOWN_COUNT = 10;
+ChecaAplicativo.prototype.DOWN_COUNT = 3;
 
 ChecaAplicativo.prototype.label = function () {
   return this.data.cliente + " : " + this.data.nome;
@@ -54,9 +54,9 @@ ChecaAplicativo.prototype._handleError = function(error, response) {
 
     return this.label() + " ficou instável";
   } else {
-    if(this.data.errorCount > 6) {
+    if(this.data.errorCount > this.DOWN_COUNT) {
       return null;
-    } else if(this.data.errorCount == 6) {
+    } else if(this.data.errorCount == this.DOWN_COUNT) {
       this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
       this.data.status = 'down';
       this.data.desde = moment().format("DD/MM/YYYY HH:mm");

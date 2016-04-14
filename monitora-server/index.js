@@ -8,7 +8,7 @@ var monitoraRef = new Firebase('https://monitora.firebaseio.com/')
 var aplicativosRef = monitoraRef.child('aplicativos');
 var eventosRef = monitoraRef.child('eventos');
 
-var INTERVALO_EXECUCAO = 5000;
+var INTERVALO_EXECUCAO = 20000;
 
 var checaTodosOsAplicativos = function () {
   aplicativosRef.once('value', function(snap) {
