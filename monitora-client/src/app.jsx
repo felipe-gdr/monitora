@@ -11,6 +11,7 @@ var Grid = require('./components/grid');
 var Menu = require('./components/menu');
 var AplicativoForm = require('./components/aplicativo-form');
 var AtualizacaoDisplay = require('./components/atualizacao-display');
+var Notificacao = require('./components/notificacao');
 
 // Url Firebase
 var rootUrl = 'https://monitora.firebaseio.com/';
@@ -47,10 +48,7 @@ var Main = React.createClass({
         </main>
         {/*<Menu />*/}
       </div>
-      <div id="notificacao" className="mdl-js-snackbar mdl-snackbar">
-        <div className="mdl-snackbar__text"></div>
-        <button className="mdl-snackbar__action" type="button"></button>
-      </div>
+      <Notificacao ref="notificacao"/>
     </div>
   },
   setItensNovos: function(snap) {
@@ -59,18 +57,7 @@ var Main = React.createClass({
   handleEventoLoaded: function (snap) {
     if(!eventosNovos) return;
 
-    var notificacaoContainer = document.querySelector('#notificacao');
-    var mensagem = snap.val().mensagem;
-
-    notificacaoContainer.MaterialSnackbar.showSnackbar({
-      message: mensagem
-    });
-
-    if(mensagem.indexOf('caiu') > -1) {
-      new Audio('./sounds/error.mp3').play();
-    } else if (mensagem.indexOf('subiu') > -1) {
-      new Audio('./sounds/beep.mp3').play();
-    }
+    this.refs.notificacao.showMessage(snap.val().mensagem);
 
     this.setState({
       dataUltimaAtualizacao: new Date()
