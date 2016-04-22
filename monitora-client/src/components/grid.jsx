@@ -10,16 +10,18 @@ module.exports = React.createClass({
     </div>
   },
   renderAplicativos: function() {
-    if(!this.props.aplicativos) {
+    var aplicativos = this.props.aplicativos;
+
+    if(!aplicativos) {
       return <h4>
         Inclua aplicativos para começar
       </h4>
     } else {
       var children = [];
 
-      for(var key in this.props.aplicativos) {
+      for(var key in aplicativos) {
         if(key != '.key') {
-          var aplicativo = this.props.aplicativos[key];
+          var aplicativo = aplicativos[key];
           aplicativo.key = key;
 
           children.push(

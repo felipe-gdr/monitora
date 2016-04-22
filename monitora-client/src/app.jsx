@@ -4,6 +4,11 @@ var ReactFire = require('reactfire');
 var Firebase = require('firebase');
 var _ = require('lodash');
 
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var IndexRedirect = ReactRouter.IndexRedirect;
+
 // Componentes
 var Botao = require('./components/botao');
 var Header = require('./components/header');
@@ -12,6 +17,7 @@ var Menu = require('./components/menu');
 var AplicativoForm = require('./components/aplicativo-form');
 var AtualizacaoDisplay = require('./components/atualizacao-display');
 var Notificacao = require('./components/notificacao');
+var AplicativoDetalhe = require('./components/aplicativo-detalhe');
 
 // Url Firebase
 var rootUrl = 'https://monitora.firebaseio.com/';
@@ -38,13 +44,15 @@ var Main = React.createClass({
     this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
   },
   render: function() {
+    var children = React.cloneElement(this.props.children, {aplicativos: this.state.aplicativos});
+
     return  <div>
       <div className="mdl-layout mdl-js-layout">
         <Header eventos={this.state.eventos} aplicativos={this.state.aplicativos} handleFechaMensagens={this.handleFechaMensagens} />
         <main className="mdl-layout__content">
           {/*<AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>*/}
           <AplicativoForm aplicativosStore={this.firebaseRefs.aplicativos}/>
-          <Grid aplicativos={this.state.aplicativos}/>
+          {children}
         </main>
         {/*<Menu />*/}
       </div>
@@ -82,5 +90,15 @@ var Main = React.createClass({
 
 });
 
-var element = React.createElement(Main, {});
-ReactDOM.render(element, document.querySelector('.container'));
+var routes = (
+  <Router>
+    <Route path="/" component={Main}>
+      <Route path="grid" component={Grid} />
+      <Route path="app/:app" component={AplicativoDetalhe} />
+      <IndexRedirect to="grid" />
+    </Route>
+  </Router>
+);
+
+//var element = React.createElement(Main, {});
+ReactDOM.render(routes, document.querySelector('.container'));

@@ -1,5 +1,7 @@
 var React = require('react');
 
+var Link = require('react-router').Link;
+
 module.exports = React.createClass({
   getInitialState: function () {
     return {
@@ -13,11 +15,11 @@ module.exports = React.createClass({
         className={classes}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}>
-      <a href="#">
+      <Link to={'app/' + this.props.cliente + "_" + this.props.nome}>
         <div className={"status-" + this.props.status + " mdl-card__title"}>
             <h4 className="mdl-card__title-text">{this.props.cliente + " : " + this.props.nome}</h4>
         </div>
-      </a>
+      </Link>
       <div className="mdl-card__supporting-text">
         {this.detalhes()}
       </div>

@@ -1,11 +1,13 @@
 var React = require('react');
 var Mensagens = require('./mensagens');
+var Link = require('react-router').Link;
 
 module.exports = React.createClass({
   render: function() {
     return  <header className="mdl-layout__header mdl-layout__header--scroll header">
       <div className="mdl-layout__header-row">
-        <span className="mdl-layout-title">Monitoramento</span>
+        <img className="logo" src="imagens/monitora-down.png" />
+        <span className="mdl-layout-title"><Link to="/grid" className="mdl-navigation__link">Monitoramento</Link></span>
         <div className="mdl-layout-spacer"></div>
         <nav className="mdl-navigation">
           <a className="mdl-navigation__link qtde-up" href="">
