@@ -22,11 +22,17 @@ var checaTodosOsAplicativos = function () {
         if(mensagem) {
           aplicativosRef.child(this.data.key).set(this.data);
 
-          eventosRef.push({
+          var novoEventoRef = eventosRef.push({
             aplicativoKey: this.data.key,
             dataEvento: new Date().getTime(),
             mensagem: mensagem
           });
+
+          var chaveEvento = novoEventoRef.key();
+
+          console.log('Chave Evento: ', chaveEvento);
+
+          aplicativosRef.child(this.data.key + '/eventos/' + chaveEvento).set(true);
         }
       });
 

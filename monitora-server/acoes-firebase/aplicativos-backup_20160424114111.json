@@ -1,0 +1,236 @@
+{
+  "Advanta_Populis I": {
+    "cliente": "Advanta",
+    "key": "Advanta_Populis I",
+    "nome": "Populis I",
+    "url": "https://advanta.populisservicos.com.br/populis"
+  },
+  "Advanta_Populis II": {
+    "cliente": "Advanta",
+    "key": "Advanta_Populis II",
+    "nome": "Populis II",
+    "url": "https://advanta.populisservicos.com.br/populisII-web"
+  },
+  "Amadeus_Populis I": {
+    "cliente": "Amadeus",
+    "key": "Amadeus_Populis I",
+    "nome": "Populis I",
+    "url": "https://amadeus.populisservicos.com.br/populis"
+  },
+  "Amadeus_Populis II": {
+    "cliente": "Amadeus",
+    "key": "Amadeus_Populis II",
+    "nome": "Populis II",
+    "url": "https://amadeus.populisservicos.com.br/populisII-web"
+  },
+  "Arauco_Populis I": {
+    "cliente": "Arauco",
+    "key": "Arauco_Populis I",
+    "nome": "Populis I",
+    "url": "https://arauco.populisservicos.com.br/populis"
+  },
+  "Ascenty_Populis I": {
+    "cliente": "Ascenty",
+    "key": "Ascenty_Populis I",
+    "nome": "Populis I",
+    "url": "https://ascenty.populisservicos.com.br/populis"
+  },
+  "Autoliv_Populis I": {
+    "cliente": "Autoliv",
+    "key": "Autoliv_Populis I",
+    "nome": "Populis I",
+    "url": "https://autoliv.populisservicos.com.br/populis"
+  },
+  "Autoliv_Populis II": {
+    "cliente": "Autoliv",
+    "key": "Autoliv_Populis II",
+    "nome": "Populis II",
+    "url": "https://autoliv.populisservicos.com.br/populisII-web"
+  },
+  "Baxalta_Populis I": {
+    "cliente": "Baxalta",
+    "key": "Baxalta_Populis I",
+    "nome": "Populis I",
+    "url": "https://baxalta.populisservicos.com.br/populis"
+  },
+  "Chubb_Populis I": {
+    "cliente": "Chubb",
+    "key": "Chubb_Populis I",
+    "nome": "Populis I",
+    "url": "https://chubb.populisservicos.com.br/populis"
+  },
+  "Cushman_Populis I": {
+    "cliente": "Cushman",
+    "key": "Cushman_Populis I",
+    "nome": "Populis I",
+    "url": "https://cushman.populisservicos.com.br/populis"
+  },
+  "Cushman_Populis II": {
+    "cliente": "Cushman",
+    "key": "Cushman_Populis II",
+    "nome": "Populis II",
+    "url": "https://cushman.populisservicos.com.br/populisII-web"
+  },
+  "Delphi_Populis I": {
+    "cliente": "Delphi",
+    "key": "Delphi_Populis I",
+    "nome": "Populis I",
+    "url": "https://delphi.populisservicos.com.br/populis"
+  },
+  "Elemidia_Populis I": {
+    "cliente": "Elemidia",
+    "key": "Elemidia_Populis I",
+    "nome": "Populis I",
+    "url": "https://elemidia.populisservicos.com.br/populis"
+  },
+  "Elemidia_Populis II": {
+    "cliente": "Elemidia",
+    "key": "Elemidia_Populis II",
+    "nome": "Populis II",
+    "url": "https://elemidia.populisservicos.com.br/populisII-web"
+  },
+  "Engecorps_Populis I": {
+    "cliente": "Engecorps",
+    "key": "Engecorps_Populis I",
+    "nome": "Populis I",
+    "url": "https://engecorps.populisservicos.com.br/populis"
+  },
+  "GLR_Populis I": {
+    "cliente": "GLR",
+    "key": "GLR_Populis I",
+    "nome": "Populis I",
+    "url": "https://glr.populisservicos.com.br/populis"
+  },
+  "GLR_Populis II": {
+    "cliente": "GLR",
+    "key": "GLR_Populis II",
+    "nome": "Populis II",
+    "url": "https://glr.populisservicos.com.br/populisII-web"
+  },
+  "Galderma_Populis I": {
+    "cliente": "Galderma",
+    "key": "Galderma_Populis I",
+    "nome": "Populis I",
+    "url": "https://galderma.populisservicos.com.br/populis"
+  },
+  "Galderma_Populis II": {
+    "cliente": "Galderma",
+    "key": "Galderma_Populis II",
+    "nome": "Populis II",
+    "url": "https://galderma.populisservicos.com.br/populisII-web"
+  },
+  "Hanon_Populis I": {
+    "cliente": "Hanon",
+    "key": "Hanon_Populis I",
+    "nome": "Populis I",
+    "url": "https://hanon.populisservicos.com.br/populis"
+  },
+  "Itaim_Populis I": {
+    "cliente": "Itaim",
+    "key": "Itaim_Populis I",
+    "nome": "Populis I",
+    "url": "https://itaim.populisservicos.com.br/populis"
+  },
+  "Konecta_Populis I": {
+    "cliente": "Konecta",
+    "key": "Konecta_Populis I",
+    "nome": "Populis I",
+    "url": "https://konecta.populisservicos.com.br/populis"
+  },
+  "Konecta_Populis II": {
+    "cliente": "Konecta",
+    "key": "Konecta_Populis II",
+    "nome": "Populis II",
+    "url": "https://konecta.populisservicos.com.br/populisII-web"
+  },
+  "Luxottica_Populis I": {
+    "cliente": "Luxottica",
+    "key": "Luxottica_Populis I",
+    "nome": "Populis I",
+    "url": "https://luxottica.populisservicos.com.br/populis"
+  },
+  "Luxottica_Populis II": {
+    "cliente": "Luxottica",
+    "key": "Luxottica_Populis II",
+    "nome": "Populis II",
+    "url": "https://luxottica.populisservicos.com.br/populisII-web"
+  },
+  "MSX_Populis I": {
+    "cliente": "MSX",
+    "key": "MSX_Populis I",
+    "nome": "Populis I",
+    "url": "https://msx.populisservicos.com.br/populis"
+  },
+  "Mogul_Populis I": {
+    "cliente": "Mogul",
+    "key": "Mogul_Populis I",
+    "nome": "Populis I",
+    "url": "https://mogul.populisservicos.com.br/populis"
+  },
+  "Momentive_Populis I": {
+    "cliente": "Momentive",
+    "key": "Momentive_Populis I",
+    "nome": "Populis I",
+    "url": "https://momentive.populisservicos.com.br/populis"
+  },
+  "NEC_Populis I": {
+    "cliente": "NEC",
+    "key": "NEC_Populis I",
+    "nome": "Populis I",
+    "url": "https://nec.populisservicos.com.br/populis"
+  },
+  "NEC_Populis II": {
+    "cliente": "NEC",
+    "key": "NEC_Populis II",
+    "nome": "Populis II",
+    "url": "https://nec.populisservicos.com.br/populisII-web"
+  },
+  "Nova_Populis I": {
+    "cliente": "Nova",
+    "key": "Nova_Populis I",
+    "nome": "Populis I",
+    "url": "https://novaveiculos.populisservicos.com.br/populis"
+  },
+  "Passarelli_Populis I": {
+    "cliente": "Passarelli",
+    "key": "Passarelli_Populis I",
+    "nome": "Populis I",
+    "url": "https://passarelli.populisservicos.com.br/populis"
+  },
+  "Reydel_Populis I": {
+    "cliente": "Reydel",
+    "key": "Reydel_Populis I",
+    "nome": "Populis I",
+    "url": "https://reydel.populisservicos.com.br/populis"
+  },
+  "Reydel_Populis II": {
+    "cliente": "Reydel",
+    "key": "Reydel_Populis II",
+    "nome": "Populis II",
+    "url": "https://reydel.populisservicos.com.br/populisII-web"
+  },
+  "Titan_Populis I": {
+    "cliente": "Titan",
+    "key": "Titan_Populis I",
+    "nome": "Populis I",
+    "url": "https://titan.populisservicos.com.br/populis"
+  },
+  "Triad_Populis I": {
+    "cliente": "Triad",
+    "key": "Triad_Populis I",
+    "nome": "Populis I",
+    "url": "https://triad.populisservicos.com.br/populis"
+  },
+  "Veyance_Populis I": {
+    "cliente": "Veyance",
+    "key": "Veyance_Populis I",
+    "nome": "Populis I",
+    "url": "https://veyance.populisservicos.com.br/populis"
+  },
+  "Visteon_Populis I": {
+    "cliente": "Visteon",
+    "key": "Visteon_Populis I",
+    "nome": "Populis I",
+    "url": "https://visteon.populisservicos.com.br/populis"
+  }
+}
