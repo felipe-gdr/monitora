@@ -38,7 +38,7 @@ var Main = React.createClass({
     this.fbAplicativos = new Firebase(rootUrl + 'aplicativos/');
     this.bindAsArray(this.fbAplicativos, 'aplicativos');
 
-    this.fbEventos = new Firebase(rootUrl + 'eventos/');
+    this.fbEventos = new Firebase(rootUrl + 'eventosRecentes/');
     this.fbEventos.on('child_added', this.handleEventoLoaded);
     // realiza uma pesquisa para separar os eventos pré-existentes dos novos
     this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
