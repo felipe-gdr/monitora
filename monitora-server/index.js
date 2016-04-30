@@ -11,12 +11,12 @@ var eventosPorAplicativo = monitoraRef.child('eventosPorAplicativo');
 
 var INTERVALO_EXECUCAO = 20000;
 
-var QTDE_EVENTOS_RECENTES = 50;
-
-var incluirEvento(appKey, mensagem) {
+var incluirEvento  = function(appKey, mensagem) {
+  var dataEvento = new Date();
   var eventoObj = {
     aplicativoKey: appKey,
-    dataEvento: new Date().getTime(),
+    dataEvento: dataEvento.getTime(),
+    dataEventoStr: moment(dataEvento).format('DD/MM/YYYY HH:mm:ss'),
     mensagem: mensagem
   };
 
@@ -25,8 +25,6 @@ var incluirEvento(appKey, mensagem) {
 
   var chaveEvento = novoEventoRef.key();
 
-  console.log('Chave Evento: ', chaveEvento);
-
   // Inclui evento na lista de eventos por aplicativo
   eventosPorAplicativo.child(appKey + '/' + chaveEvento).set(eventoObj);
 }
@@ -34,9 +32,9 @@ var incluirEvento(appKey, mensagem) {
 /*
  * Remove eventos recentes para deixar apenas a quantidade máxima desejada.
  */
-var limpaEventosRecentes() {
-  eventosRecentesRef.startAt(QTDE_EVENTOS_RECENTES).on('child_added', function(snap) {
-    snap.remove();
+var limpaEventosRecentes = function () {
+  eventosRecentesRef.limitToLast(50).once('value', function(snap) {
+    eventosRecentesRef.set(snap.val());
   });
 }
 

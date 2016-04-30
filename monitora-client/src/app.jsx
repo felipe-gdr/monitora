@@ -23,7 +23,6 @@ var AplicativoDetalhe = require('./components/aplicativo-detalhe');
 var rootUrl = 'https://monitora.firebaseio.com/';
 
 var eventosNovos = false;
-var MAX_EVENTOS = 10;
 
 var Main = React.createClass({
   mixins: [ReactFire],
@@ -39,7 +38,7 @@ var Main = React.createClass({
     this.bindAsArray(this.fbAplicativos, 'aplicativos');
 
     this.fbEventos = new Firebase(rootUrl + 'eventosRecentes/');
-    this.fbEventos.on('child_added', this.handleEventoLoaded);
+    this.fbEventos.limitToLast(10).on('child_added', this.handleEventoLoaded);
     // realiza uma pesquisa para separar os eventos pré-existentes dos novos
     this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
   },
@@ -73,10 +72,6 @@ var Main = React.createClass({
 
     var eventos = this.state.eventos;
     eventos.unshift(snap.val());
-
-    if(eventos.length > MAX_EVENTOS) {
-      eventos = _.initial(eventos);
-    }
 
     this.setState({
         eventos: eventos
