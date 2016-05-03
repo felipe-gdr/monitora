@@ -1,7 +1,68 @@
 .aplicativo-detalhe {
-  .img-status {
-    height: 40px;
-    margin-left: 20px;
-    margin-top: -10px;
+  .titulo-aplicativo {
+    margin-left: 40px;
+  }
+
+  .paineis-detalhes {
+    display: table-row;
+
+    .painel-detalhe {
+      display: table-cell;
+      padding: 0 40px 40px;
+
+      .titulo {
+        font-size: 24px;
+      }
+
+      .mdl-card__title {
+        color: black;
+
+        &.status-down {
+          background-color: rgb(244,67,54);
+          color: white;
+        }
+
+        &.status-up {
+          background-color: rgb(0,150,136);
+          color: white;
+        }
+      }
+
+      .mdl-card__actions {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .lista-de-eventos {
+    margin: auto;
+    width: 500px;
+
+    .titulo {
+      text-align: center;
+      padding-top: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      overflow: auto;
+      height: 400px;
+
+      li {
+        .horario {
+          display: inline;
+          margin-left: 10px;
+          font-size: 11px;
+        }
+
+        .subiu i {
+          color: green;
+        }
+
+        .caiu i {
+          color: red;
+        }
+      }
+    }
   }
 }

@@ -16,7 +16,7 @@ ChecaAplicativo.prototype.urlFinal = function() {
     if(this.data.nome == 'Populis II') {
       return this.data.url + '/rest/administracao/info';
     } else {
-      return this.data.url;
+      return this.data.url + '/seguranca/login-default-frame.do';
     }
 }
 
