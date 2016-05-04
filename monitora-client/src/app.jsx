@@ -73,6 +73,10 @@ var Main = React.createClass({
     var eventos = this.state.eventos;
     eventos.unshift(snap.val());
 
+    if(eventos.length > 10) {
+      eventos = _.initial(eventos);
+    }
+
     this.setState({
         eventos: eventos
     });
