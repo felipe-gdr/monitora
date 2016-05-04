@@ -27,7 +27,7 @@ module.exports = React.createClass({
     var umaSemanaAtras = moment().subtract(7, 'day');
 
     eventosPorAplicativoRef.orderByChild('dataEvento').startAt(umaSemanaAtras.toDate().getTime()).once('value', function (snap) {
-      var eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados();
+      var eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados().reverse();
       var eventosDoAplicativo = _.values(snap.val()).reverse();
 
       console.log('eventosOrganizados', eventosOrganizados);
@@ -93,7 +93,7 @@ module.exports = React.createClass({
     if(this.state.eventosOrganizados.length == 0) {
       desde = 'mais de 7 dias atrás'
     } else {
-      desde = "desde " + moment(this.state.eventosOrganizados.reverse()[0].dataEvento).fromNow();
+      desde = "desde " + (moment(this.state.eventosOrganizados[0].dataEvento).fromNow());
     }
 
     return <div className="titulo">
@@ -104,7 +104,7 @@ module.exports = React.createClass({
     if(this.state.eventosOrganizados.length == 0) {
       return 'mais de 7 dias atrás';
     } else {
-      return "desde : " + moment(this.state.eventosOrganizados.reverse()[0].dataEvento).format('DD/MM/YYYY HH:mm');
+      return "desde : " + moment(this.state.eventosOrganizados[0].dataEvento).format('DD/MM/YYYY HH:mm');
     }
 
   },
