@@ -33,7 +33,6 @@ ChecaAplicativo.prototype.checaStatus = function (callback) {
     var houveAtualizacao;
 
     if(error && error.code == 'ETIMEDOUT') {
-      console.log('timeout', this.data.nome, this.data.cliente);
       houveAtualizacao = this._handleError(error, response);
     } else if(response && response.statusCode === 200) {
       houveAtualizacao = this._handleSucesso(body, response);
@@ -75,7 +74,7 @@ ChecaAplicativo.prototype._handleError = function(error, response) {
 
 ChecaAplicativo.prototype._handleSucesso = function(body, response) {
   if(this.data.nome == 'Populis II') {
-    this.data.detalhesPop2 = eval('(' + body + ')');;
+    this.data.detalhesServidor = eval('(' + body + ')');;
   }
 
   if(this.data.statusAnterior != 'up') {
