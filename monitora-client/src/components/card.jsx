@@ -62,7 +62,11 @@ module.exports = React.createClass({
   cluster: function () {
     if(this.props.cluster) {
       var nodes = _.values(this.props.cluster).map(function (node) {
-        return <div className={"node status-" + node.status} title={node.nomeNode + ' - ' + node.status}/>
+        return <div
+          key={node.nomeNode}
+          className={"node status-" + node.status}
+          title={node.nomeNode + ' - ' + node.status}
+          />
       });
 
       return <div className="nodes">
