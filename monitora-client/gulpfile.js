@@ -9,6 +9,8 @@ var server = require('gulp-server-livereload');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
+var uglify = require('gulp-uglify');
+var streamify = require('gulp-streamify');
 
 var notify = function(error) {
   console.log('erro', error);
@@ -48,6 +50,7 @@ function bundle() {
     .bundle()
     .on('error', notify)
     .pipe(source('main.js'))
+    .pipe(streamify(uglify()))
     .pipe(gulp.dest('./'))
 }
 bundler.on('update', bundle);
@@ -85,3 +88,5 @@ gulp.task('default', ['build', 'serve', 'sass', 'watch']);
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
+
+gulp.task('prod', ['build', 'sass']);
