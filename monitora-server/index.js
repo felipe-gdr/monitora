@@ -9,7 +9,7 @@ var aplicativosRef = monitoraRef.child('aplicativos');
 var eventosRecentesRef = monitoraRef.child('eventosRecentes');
 var eventosPorAplicativo = monitoraRef.child('eventosPorAplicativo');
 
-var INTERVALO_EXECUCAO = 5000;
+var INTERVALO_EXECUCAO = 20000;
 
 var incluirEvento  = function(appKey, mensagem) {
   var dataEvento = new Date();
