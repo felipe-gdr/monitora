@@ -1,5 +1,6 @@
 var request = require('request');
 var moment = require('moment');
+var _ = require('lodash');
 
 module.exports = ChecaAplicativo = function (aplicativoJson) {
   this.data = aplicativoJson;
@@ -8,81 +9,100 @@ module.exports = ChecaAplicativo = function (aplicativoJson) {
 ChecaAplicativo.prototype.TIMEOUT = 10000;
 ChecaAplicativo.prototype.DOWN_COUNT = 3;
 
-ChecaAplicativo.prototype.label = function () {
-  return this.data.cliente + " : " + this.data.nome;
+ChecaAplicativo.prototype.label = function (baseApp) {
+  if(baseApp.nomeNode) {
+    return baseApp.nomeNode;
+  } else {
+    return baseApp.cliente + " : " + baseApp.nome;
+  }
+
 }
 
-ChecaAplicativo.prototype.urlFinal = function() {
+ChecaAplicativo.prototype.urlFinal = function(baseUrl) {
     if(this.data.nome == 'Populis II') {
-      return this.data.url + '/rest/administracao/info';
+      return baseUrl + '/rest/administracao/info';
     } else {
-      return this.data.url + '/seguranca/login-default-frame.do';
+      return baseUrl + '/seguranca/login-default-frame.do';
     }
 }
 
 ChecaAplicativo.prototype.checaStatus = function (callback) {
-  var urlFinal = this.urlFinal();
+  this.checaAplicativo(this.data, callback);
+
+  if(this.data.cluster) {
+    _.keys(this.data.cluster).forEach(function(nomeNode) {
+      var nodeCluster  = this.data.cluster[nomeNode];
+      nodeCluster.nomeNode = nomeNode;
+      this.checaAplicativo(nodeCluster, callback);
+    }.bind(this));
+  }
+}
+
+ChecaAplicativo.prototype.checaAplicativo = function (baseApp, callback) {
+  var urlFinal = this.urlFinal(baseApp.url);
 
   return request({
     url: urlFinal,
     timeout: this.TIMEOUT
   }, function(error, response, body) {
 
-    this.data.statusAnterior = this.data.status || 'unknow';
+    baseApp.statusAnterior = baseApp.status || 'unknow';
 
     var houveAtualizacao;
 
     if(error && error.code == 'ETIMEDOUT') {
-      houveAtualizacao = this._handleError(error, response);
+      houveAtualizacao = this.handleError(baseApp, error, response);
     } else if(response && response.statusCode === 200) {
-      houveAtualizacao = this._handleSucesso(body, response);
+      houveAtualizacao = this.handleSucesso(baseApp, body, response);
     } else {
-      houveAtualizacao = this._handleError(error, response);
+      houveAtualizacao = this.handleError(baseApp, error, response);
     }
 
-    callback.bind(this)(houveAtualizacao);
+    if(callback) {
+      callback.bind(this)(houveAtualizacao);
+    }
 
   }.bind(this));
 }
 
-ChecaAplicativo.prototype._handleError = function(error, response) {
-  if(this.data.statusAnterior == 'up' || this.data.statusAnterior == 'unknow') {
-    this.data.errorCount = 1;
-    this.data.desde = moment().format("DD/MM/YYYY HH:mm");
-    this.data.status = 'unstable';
+ChecaAplicativo.prototype.handleError = function(baseApp, error, response) {
+  if(baseApp.statusAnterior == 'up' || baseApp.statusAnterior == 'unknow') {
+    baseApp.errorCount = 1;
+    baseApp.desde = moment().format("DD/MM/YYYY HH:mm");
+    baseApp.status = 'unstable';
 
-    return this.label() + " ficou instável";
+    return this.label(baseApp) + " ficou instável";
   } else {
-    if(this.data.errorCount > this.DOWN_COUNT) {
+    if(baseApp.errorCount > this.DOWN_COUNT) {
       return null;
-    } else if(this.data.errorCount == this.DOWN_COUNT) {
-      this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
-      this.data.status = 'down';
-      this.data.desde = moment().format("DD/MM/YYYY HH:mm");
-      this.data.ultimaAlteracao = 'caiu';
+    } else if(baseApp.errorCount == this.DOWN_COUNT) {
+      baseApp.errorCount = baseApp.errorCount ? baseApp.errorCount + 1 : 1;
+      baseApp.status = 'down';
+      baseApp.desde = moment().format("DD/MM/YYYY HH:mm");
+      baseApp.ultimaAlteracao = 'caiu';
 
-      return this.label() + " caiu";
+      return this.label(baseApp) + " caiu";
     } else {
-      this.data.errorCount = this.data.errorCount ? this.data.errorCount + 1 : 1;
+      baseApp.errorCount = baseApp.errorCount ? baseApp.errorCount + 1 : 1;
 
-      return this.label() + " continua instável";
+      return this.label(baseApp) + " continua instável";
     }
   }
 
-  this.data.errorCode = response ? response.statusCode : null;
+  baseApp.errorCode = response ? response.statusCode : null;
 };
 
-ChecaAplicativo.prototype._handleSucesso = function(body, response) {
-  if(this.data.nome == 'Populis II') {
-    this.data.detalhesServidor = eval('(' + body + ')');;
+ChecaAplicativo.prototype.handleSucesso = function(baseApp, body, response) {
+  if(baseApp.nome == 'Populis II') {
+    baseApp.detalhesServidor = eval('(' + body + ')');;
   }
 
-  if(this.data.statusAnterior != 'up') {
-    this.data.status = 'up';
-    this.data.desde = moment().format("DD/MM/YYYY HH:mm");
-    this.data.ultimaAlteracao = 'subiu';
+  if(baseApp.statusAnterior != 'up') {
+    baseApp.status = 'up';
+    baseApp.desde = moment().format("DD/MM/YYYY HH:mm");
+    baseApp.ultimaAlteracao = 'subiu';
 
-    return this.label() + " subiu";
+    return this.label(baseApp) + " subiu";
   } else {
     return null;
   }

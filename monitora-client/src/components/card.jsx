@@ -1,4 +1,5 @@
 var React = require('react');
+var _ = require('lodash');
 
 var Link = require('react-router').Link;
 
@@ -32,6 +33,7 @@ module.exports = React.createClass({
           onClick={this.handleAbreUrlClicked}>
           <i className="material-icons">open_in_new</i>
         </button>
+        {this.cluster()}
       </div>
     </div>
   },
@@ -39,11 +41,11 @@ module.exports = React.createClass({
     window.open(this.props.url,'_blank')
   },
   detalhes: function () {
-    if(this.props.detalhesPop2) {
+    if(this.props.detalhesServidor) {
       return <ul className="detalhes-app">
-        <li>Versão app: {this.props.detalhesPop2.versaoPopulis}</li>
-        <li>Versão migração BD: {this.props.detalhesPop2.versaoMigracaoBancoDeDados}</li>
-        <li>Servidor: {this.props.detalhesPop2.nomePcServidor}</li>
+        <li>Versão app: {this.props.detalhesServidor.versaoPopulis}</li>
+        <li>Servidor: {this.props.detalhesServidor.nomePcServidor}</li>
+        <li>IP: {this.props.detalhesServidor.ipServidor}</li>
       </ul>;
     }
     return "";
@@ -56,6 +58,18 @@ module.exports = React.createClass({
     } else {
       return "";
     }
+  },
+  cluster() {
+    if(this.props.cluster) {
+      var nodes = _.values(this.props.cluster).map(function (node) {
+        return <div className={"node status-" + node.status} title={node.nomeNode + ' - ' + node.status}/>
+      });
+
+      return <div className="nodes">
+        {nodes}
+      </div>
+    }
+
   },
   handleMouseEnter: function() {
     this.setState({
