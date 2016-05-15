@@ -8,6 +8,7 @@ var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRedirect = ReactRouter.IndexRedirect;
+var hashHistory = ReactRouter.hashHistory;
 
 // Componentes
 var Botao = require('./components/botao');
@@ -20,7 +21,7 @@ var Notificacao = require('./components/notificacao');
 var AplicativoDetalhe = require('./components/aplicativo-detalhe');
 
 // Url Firebase
-var rootUrl = 'https://monitora.firebaseio.com/';
+var ROOT_URL = require('./constantes').ROOT_URL;
 
 var eventosNovos = false;
 
@@ -34,10 +35,10 @@ var Main = React.createClass({
     }
   },
   componentWillMount: function() {
-    this.fbAplicativos = new Firebase(rootUrl + 'aplicativos/');
+    this.fbAplicativos = new Firebase(ROOT_URL + 'aplicativos/');
     this.bindAsArray(this.fbAplicativos, 'aplicativos');
 
-    this.fbEventos = new Firebase(rootUrl + 'eventosRecentes/');
+    this.fbEventos = new Firebase(ROOT_URL + 'eventosRecentes/');
     this.fbEventos.limitToLast(10).on('child_added', this.handleEventoLoaded);
     // realiza uma pesquisa para separar os eventos pré-existentes dos novos
     this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
@@ -90,7 +91,7 @@ var Main = React.createClass({
 });
 
 var routes = (
-  <Router>
+  <Router history={hashHistory}>
     <Route path="/" component={Main}>
       <Route path="grid" component={Grid} />
       <Route path="app/:app" component={AplicativoDetalhe} />

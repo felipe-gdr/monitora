@@ -50,10 +50,18 @@ function bundle() {
     .bundle()
     .on('error', notify)
     .pipe(source('main.js'))
-    .pipe(streamify(uglify()))
     .pipe(gulp.dest('./'))
 }
 bundler.on('update', bundle);
+
+function bundleProd() {
+  return bundler
+    .bundle()
+    .on('error', notify)
+    .pipe(source('main.js'))
+    .pipe(streamify(uglify()))
+    .pipe(gulp.dest('./'))
+}
 
 gulp.task('build', function() {
   bundle()
@@ -89,4 +97,4 @@ gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
-gulp.task('prod', ['build', 'sass']);
+gulp.task('prod', ['bundleProd', 'sass']);
