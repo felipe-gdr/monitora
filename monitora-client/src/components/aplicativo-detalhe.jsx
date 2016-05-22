@@ -8,7 +8,7 @@ var moment = require('moment');
 var ROOT_URL = require('../constantes').ROOT_URL;
 var eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
-var PainelDetalhe = require('./painel-detalhe');
+var PainelDetalhe = require('./paineis-detalhes/painel-detalhe');
 var ListaEventos = require('./paineis-detalhes/lista-eventos');
 var StatusAtual = require('./paineis-detalhes/status-atual');
 var UltimaQueda = require('./paineis-detalhes/ultima-queda');
