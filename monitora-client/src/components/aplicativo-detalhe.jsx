@@ -53,9 +53,9 @@ module.exports = React.createClass({
       <div className="paineis-detalhes">
         <StatusAtual aplicativo={this.state.aplicativo} />
 
-        <UltimaQueda />
+        <UltimaQueda app={this.props.params.app} />
 
-        <TempoNoAr />
+        <TempoNoAr app={this.props.params.app} />
       </div>
 
       <ListaEventos app={this.props.params.app} />

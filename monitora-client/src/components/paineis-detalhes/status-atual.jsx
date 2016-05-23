@@ -37,7 +37,7 @@ module.exports = React.createClass({
       return <Loading />;
     }
 
-    var desde = "desde " + (moment(this.state.eventoMaisRecente.dataEvento).fromNow());
+    var desde = "a " + (moment(this.state.eventoMaisRecente.dataEvento).fromNow());
 
     return <div className="titulo">
       Status atual : {this.props.aplicativo.status}  ({desde})

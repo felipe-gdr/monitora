@@ -34,6 +34,20 @@
     }
   }
 
+  .tempo-no-ar {
+    .status-down {
+      color: rgb(244,67,54);
+    }
+
+    .status-up {
+      color: rgb(0,150,136);
+    }
+
+    .status-unstable {
+      color: rgb(255, 193, 7);
+    }
+  }
+
   .lista-de-eventos {
     margin: auto;
     width: 500px;
@@ -46,7 +60,7 @@
     ul {
       list-style-type: none;
       overflow: auto;
-      height: 400px;
+      max-height: 400px;
 
       li {
         .horario {

@@ -5,8 +5,8 @@ var moment = require('moment');
 var Mensagem = require('../mensagem');
 
 // Url Firebase
-var rootUrl = 'https://monitora.firebaseio.com/';
-var eventosPorAplicativoUrl = rootUrl + 'eventosPorAplicativo';
+var ROOT_URL = require('../../constantes').ROOT_URL;
+var eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
 module.exports = React.createClass({
   getInitialState: function() {

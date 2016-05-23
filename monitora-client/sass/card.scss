@@ -10,6 +10,10 @@
       display: block;
       opacity: 1;
     }
+
+    .app-rodape {
+      display: block;
+    }
   }
 
   a:link {
@@ -61,6 +65,7 @@
       font-size: 11px;
       color: grey;
       letter-spacing: 0.2px;
+      display: none;
   }
 
   .mdl-card__menu {
