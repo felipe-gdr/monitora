@@ -8,6 +8,8 @@ var Mensagem = require('../mensagem');
 var ROOT_URL = require('../../constantes').ROOT_URL;
 var eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
+var QTDE_DIAS_BUSCA = 7;
+
 module.exports = React.createClass({
   getInitialState: function() {
     return {
@@ -17,9 +19,9 @@ module.exports = React.createClass({
   componentWillMount: function() {
     var eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.app);
 
-    var umDiaAtras = moment().subtract(1, 'day');
+    var periodoBusca = moment().subtract(QTDE_DIAS_BUSCA, 'day').toDate().getTime();
 
-    eventosPorAplicativoRef.orderByChild('dataEvento').startAt(umDiaAtras.toDate().getTime()).on('value', function (snap) {
+    eventosPorAplicativoRef.orderByChild('dataEvento').startAt(periodoBusca).on('value', function (snap) {
       var eventosDoAplicativo = _.values(snap.val()).reverse();
 
       this.setState({
@@ -32,7 +34,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div className="lista-de-eventos mdl-shadow--2dp">
-        <h5 className="titulo">Eventos nas últimas 24 horas</h5>
+        <h5 className="titulo">Eventos nos últimos {QTDE_DIAS_BUSCA} dias</h5>
         <ul>
           {this.listaEventos()}
         </ul>
