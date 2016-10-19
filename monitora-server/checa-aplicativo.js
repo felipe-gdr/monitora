@@ -22,7 +22,7 @@ ChecaAplicativo.prototype.urlFinal = function(baseUrl) {
     if(this.data.nome == 'Populis II') {
       return baseUrl + '/rest/administracao/info';
     } else {
-      return baseUrl + '/seguranca/login-default-frame.do';
+      return baseUrl + '/informacoes.jsp';
     }
 }
 
@@ -43,7 +43,8 @@ ChecaAplicativo.prototype.checaAplicativo = function (baseApp, callback) {
 
   return request({
     url: urlFinal,
-    timeout: this.TIMEOUT
+    timeout: this.TIMEOUT,
+    encoding: 'binary'
   }, function(error, response, body) {
 
     baseApp.statusAnterior = baseApp.status || 'unknow';
@@ -94,7 +95,15 @@ ChecaAplicativo.prototype.handleError = function(baseApp, error, response) {
 
 ChecaAplicativo.prototype.handleSucesso = function(baseApp, body, response) {
   if(baseApp.nome == 'Populis II') {
-    baseApp.detalhesServidor = eval('(' + body + ')');;
+    // Pega o JSON direto da resposta do request
+    baseApp.detalhesServidor = eval('(' + body + ')');
+  } else if(baseApp.nome == 'Populis I') {
+    // Pega o JSON de dentro do HTML retornado pelo request
+    // baseApp.detalhesServidor =
+    var match = /.*<tr><td>&nbsp;(.*)<\/td>/g.exec(body)
+    if(match != null) {
+      baseApp.detalhesServidor = eval('(' + match[1].trim() + ')');
+    }
   }
 
   if(baseApp.statusAnterior != 'up') {
