@@ -34,6 +34,7 @@ module.exports = React.createClass({
           <i className="material-icons">open_in_new</i>
         </button>
         {this.cluster()}
+        {this.calculo()}
       </div>
     </div>
   },
@@ -43,7 +44,7 @@ module.exports = React.createClass({
   detalhes: function () {
     if(this.props.detalhesServidor) {
       return <ul className="detalhes-app">
-        <li>Versão app: {this.props.detalhesServidor.versaoPopulis}</li>
+        <li>Versao app: {this.props.detalhesServidor.versaoPopulis}</li>
         <li>Servidor: {this.props.detalhesServidor.nomePcServidor}</li>
         <li>IP: {this.props.detalhesServidor.ipServidor}</li>
       </ul>;
@@ -74,6 +75,23 @@ module.exports = React.createClass({
       </div>
     }
 
+  },
+  calculo: function() {
+    var detalhesServidor = this.props.detalhesServidor
+    if(detalhesServidor && detalhesServidor.calculos) {
+      // Verifica se todos os serviços de cálculo estão no ar
+      var calcNoAr = detalhesServidor.calculos.every(function(c) {
+        return c.statusPopulisCalculo == "1"
+      })
+
+      return <div className="servico-calculo">
+        <button
+          className="mdl-button mdl-button--icon mdl-js-button">
+          <i className={`material-icons ${calcNoAr ? '' :  'down'}`}>settings</i>
+        </button>
+      </div>
+    }
+    return null
   },
   handleMouseEnter: function() {
     this.setState({
