@@ -67,6 +67,10 @@ gulp.task('build', function() {
   bundle()
 });
 
+gulp.task('bundleProd', function() {
+  bundleProd()
+});
+
 gulp.task('serve', function(done) {
   gulp.src('')
     .pipe(server({
