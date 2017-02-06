@@ -13,7 +13,7 @@ var hashHistory = ReactRouter.hashHistory;
 // Componentes
 var Botao = require('./components/botao');
 var Header = require('./components/header');
-var Grid = require('./components/grid');
+var Grid = require('./components/app-grid');
 var Menu = require('./components/menu');
 var AplicativoForm = require('./components/aplicativo-form');
 var AtualizacaoDisplay = require('./components/atualizacao-display');

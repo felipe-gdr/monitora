@@ -1,6 +1,7 @@
 var React = require('react');
 var moment = require('moment');
 var _ = require('lodash');
+var Firebase = require('firebase');
 
 var PainelDetalhe = require('./painel-detalhe');
 var OrganizaEventos = require('../../servicos/organiza-eventos');

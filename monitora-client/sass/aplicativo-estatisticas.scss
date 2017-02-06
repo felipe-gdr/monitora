@@ -1,0 +1,84 @@
+@import 'variables';
+
+.aplicativo-estatisticas {
+  .titulo-aplicativo {
+    margin-left: 40px;
+  }
+
+  .paineis-detalhes {
+    display: table-row;
+
+    .painel-detalhe {
+      display: table-cell;
+      padding: 0 40px 40px;
+
+      .titulo {
+        font-size: 24px;
+      }
+
+      .mdl-card__title {
+        color: black;
+
+        &.status-down {
+          background-color: $color-status-down;
+          color: white;
+        }
+
+        &.status-up {
+          background-color: $color-status-up;
+          color: white;
+        }
+      }
+
+      .mdl-card__actions {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .tempo-no-ar {
+    .status-down {
+      color: $color-status-down;
+    }
+
+    .status-up {
+      color: $color-status-up;
+    }
+
+    .status-unstable {
+      color: $color-status-unstable;
+    }
+  }
+
+  .lista-de-eventos {
+    margin: auto;
+    width: 500px;
+
+    .titulo {
+      text-align: center;
+      padding-top: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      overflow: auto;
+      max-height: 400px;
+
+      li {
+        .horario {
+          display: inline;
+          margin-left: 10px;
+          font-size: 11px;
+        }
+
+        .subiu i {
+          color: green;
+        }
+
+        .caiu i {
+          color: red;
+        }
+      }
+    }
+  }
+}

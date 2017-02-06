@@ -1,82 +1,46 @@
+@import 'variables';
+
 .aplicativo-detalhe {
   .titulo-aplicativo {
     margin-left: 40px;
   }
-
-  .paineis-detalhes {
-    display: table-row;
-
-    .painel-detalhe {
-      display: table-cell;
-      padding: 0 40px 40px;
-
-      .titulo {
-        font-size: 24px;
-      }
-
-      .mdl-card__title {
-        color: black;
-
-        &.status-down {
-          background-color: rgb(244,67,54);
-          color: white;
-        }
-
-        &.status-up {
-          background-color: rgb(0,150,136);
-          color: white;
-        }
-      }
-
-      .mdl-card__actions {
-        font-size: 11px;
-      }
-    }
+    
+  .url {
+    padding-left: 40px;
   }
 
-  .tempo-no-ar {
-    .status-down {
-      color: rgb(244,67,54);
-    }
+  .detalhe-pop1 {
+    margin: 0px;
+    padding: 0px 40px;
 
-    .status-up {
-      color: rgb(0,150,136);
-    }
-
-    .status-unstable {
-      color: rgb(255, 193, 7);
-    }
-  }
-
-  .lista-de-eventos {
-    margin: auto;
-    width: 500px;
-
-    .titulo {
+    h3 {
+      font-size: 23px;
       text-align: center;
-      padding-top: 15px;
-    }
-
-    ul {
-      list-style-type: none;
-      overflow: auto;
-      max-height: 400px;
-
-      li {
-        .horario {
-          display: inline;
-          margin-left: 10px;
-          font-size: 11px;
-        }
-
-        .subiu i {
-          color: green;
-        }
-
-        .caiu i {
-          color: red;
-        }
-      }
     }
   }
+
+  .label {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  .status {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  .status.up {
+    background-color: $color-status-up;
+  }
+  .status.down {
+    background-color: $color-status-down;
+  }
+
+  table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 }

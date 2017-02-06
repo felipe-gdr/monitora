@@ -4,61 +4,37 @@ var Firebase = require('firebase');
 var _ = require('lodash');
 var moment = require('moment');
 
+var DetalhesPop1 = require('./aplicativo-detalhe-pop1')
+
 // Url Firebase
 var ROOT_URL = require('../constantes').ROOT_URL;
-var eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
-
-var PainelDetalhe = require('./paineis-detalhes/painel-detalhe');
-var ListaEventos = require('./paineis-detalhes/lista-eventos');
-var StatusAtual = require('./paineis-detalhes/status-atual');
-var UltimaQueda = require('./paineis-detalhes/ultima-queda');
-var TempoNoAr = require('./paineis-detalhes/tempo-no-ar');
-
-var OrganizaEventos = require('../servicos/organiza-eventos');
 
 module.exports = React.createClass({
-  mixins: [ReactFire],
-  getInitialState: function () {
-    return {aplicativo: null, eventos: [], eventosOrganizados: []};
-  },
-  componentWillMount: function () {
-    this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
-    this.bindAsObject(this.fbAplicativo, 'aplicativo');
+    mixins: [ReactFire],
 
-    /*
-    var eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.params.app);
+    getInitialState: function() {
+        return {aplicativo: null};
+    },
 
-    var umaSemanaAtras = moment().subtract(7, 'day');
+    componentWillMount: function() {
+        this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
+        this.bindAsObject(this.fbAplicativo, 'aplicativo');
+    },
+    render: function() {
+      var aplicativo = this.state.aplicativo
 
-    eventosPorAplicativoRef.orderByChild('dataEvento').startAt(umaSemanaAtras.toDate().getTime()).once('value', function (snap) {
-      var eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados().reverse();
+      if (!aplicativo) {
+          return null;
+      }
 
-      this.setState({
-        eventosOrganizados: eventosOrganizados
-      });
-
-    }.bind(this));
-    */
-  },
-  render: function () {
-    if(!this.state.aplicativo) {
-      return null;
-    }
-
-    return <div className="aplicativo-detalhe" >
-      <h3 className="titulo-aplicativo">
-        {this.state.aplicativo.cliente} {this.state.aplicativo.nome}
-      </h3>
-
-      <div className="paineis-detalhes">
-        <StatusAtual aplicativo={this.state.aplicativo} />
-
-        <UltimaQueda app={this.props.params.app} />
-
-        <TempoNoAr app={this.props.params.app} />
+      return <div className="aplicativo-detalhe">
+          <h3 className="titulo-aplicativo">
+              {aplicativo.cliente} - {aplicativo.nome}
+          </h3>
+          <h6 className="url">
+            <a href={aplicativo.url} target="_blank">{aplicativo.url}</a>
+          </h6>
+          <DetalhesPop1 aplicativo={aplicativo} />
       </div>
-
-      <ListaEventos app={this.props.params.app} />
-    </div>
-  }
+    }
 });

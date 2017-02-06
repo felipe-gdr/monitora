@@ -28,11 +28,6 @@ module.exports = React.createClass({
           Desde: {this.props.desde}
       </div>
       <div className="mdl-card__menu">
-        <button
-          className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-          onClick={this.handleAbreUrlClicked}>
-          <i className="material-icons">open_in_new</i>
-        </button>
         {this.cluster()}
         {this.calculo()}
       </div>
@@ -42,14 +37,12 @@ module.exports = React.createClass({
     window.open(this.props.url,'_blank')
   },
   detalhes: function () {
-    if(this.props.detalhesServidor) {
-      return <ul className="detalhes-app">
-        <li>Versao app: {this.props.detalhesServidor.versaoPopulis}</li>
-        <li>Servidor: {this.props.detalhesServidor.nomePcServidor}</li>
-        <li>IP: {this.props.detalhesServidor.ipServidor}</li>
-      </ul>;
-    }
-    return "";
+    var versaoApp = this.props.detalhesServidor.versaoPopulis || this.props.detalhesServidor.versaoPopulisWeb
+    return <ul className="detalhes-app">
+      <li>Versao: {versaoApp}</li>
+      <li>Servidor: {this.props.detalhesServidor.nomePcServidor}</li>
+      <li>IP: {this.props.detalhesServidor.ipServidor}</li>
+    </ul>;
   },
   icone: function () {
     if(this.props.status === 'up') {
