@@ -81,7 +81,8 @@ module.exports = React.createClass({
     if(detalhesServidor && detalhesServidor.calculos) {
       // Verifica se todos os serviços de cálculo estão no ar
       var calcNoAr = detalhesServidor.calculos.every(function(c) {
-        return c.statusPopulisCalculo == "1"
+        // Serviços que não estão em uso não são considerados
+        return c.emUsoPopulisCalculo == 'N' || c.statusPopulisCalculo == "1"
       })
 
       return <div className="servico-calculo">
