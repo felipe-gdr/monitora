@@ -1,0 +1,28 @@
+@import 'variables';
+
+.label {
+  font-weight: bold;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.status {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.status.up {
+  background-color: $color-status-up;
+}
+.status.down {
+  background-color: $color-status-down;
+}
+.status.unstable {
+  background-color: $color-status-unstable;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}

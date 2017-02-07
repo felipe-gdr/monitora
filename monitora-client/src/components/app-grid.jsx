@@ -1,5 +1,5 @@
 var React = require('react');
-var Card = require('./card');
+var AppCard = require('./app-card');
 
 module.exports = React.createClass({
   render: function() {
@@ -25,7 +25,7 @@ module.exports = React.createClass({
           aplicativo.key = key;
 
           children.push(
-            <Card {...aplicativo} key={key}/>
+            <AppCard {...aplicativo} key={key}/>
           );
         }
       }
