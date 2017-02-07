@@ -13,12 +13,12 @@ var hashHistory = ReactRouter.hashHistory;
 // Componentes
 var Botao = require('./components/botao');
 var Header = require('./components/header');
-var Grid = require('./components/app-grid');
+var AppGrid = require('./components/app-grid');
 var Menu = require('./components/menu');
-var AplicativoForm = require('./components/aplicativo-form');
+var AppForm = require('./components/app-form');
 var AtualizacaoDisplay = require('./components/atualizacao-display');
 var Notificacao = require('./components/notificacao');
-var AplicativoDetalhe = require('./components/aplicativo-detalhe');
+var AppDetalhe = require('./components/app-detalhe');
 
 // Url Firebase
 var ROOT_URL = require('./constantes').ROOT_URL;
@@ -51,7 +51,7 @@ var Main = React.createClass({
         <Header eventos={this.state.eventos} aplicativos={this.state.aplicativos} handleFechaMensagens={this.handleFechaMensagens} />
         <main className="mdl-layout__content">
           {/*<AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>*/}
-          <AplicativoForm aplicativosStore={this.firebaseRefs.aplicativos}/>
+          <AppForm aplicativosStore={this.firebaseRefs.aplicativos}/>
           {children}
         </main>
         {/*<Menu />*/}
@@ -93,9 +93,9 @@ var Main = React.createClass({
 var routes = (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
-      <Route path="grid" component={Grid} />
-      <Route path="app/:app" component={AplicativoDetalhe} />
-      <IndexRedirect to="grid" />
+      <Route path="app" component={AppGrid} />
+      <Route path="app/:app" component={AppDetalhe} />
+      <IndexRedirect to="app" />
     </Route>
   </Router>
 );

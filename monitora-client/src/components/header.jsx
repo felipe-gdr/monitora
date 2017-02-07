@@ -7,7 +7,7 @@ module.exports = React.createClass({
     return  <header className="mdl-layout__header mdl-layout__header--scroll header">
       <div className="mdl-layout__header-row">
         <img className="logo" src="imagens/monitora-down.png" />
-        <span className="mdl-layout-title"><Link to="/grid" className="mdl-navigation__link">Monitoramento</Link></span>
+        <span className="mdl-layout-title"><Link to="/app" className="mdl-navigation__link">Monitoramento</Link></span>
         <div className="mdl-layout-spacer"></div>
         <nav className="mdl-navigation">
           <a className="mdl-navigation__link qtde-up" href="">

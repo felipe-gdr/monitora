@@ -4,7 +4,7 @@ var Firebase = require('firebase');
 var _ = require('lodash');
 var moment = require('moment');
 
-var DetalhesPop1 = require('./aplicativo-detalhe-pop1')
+var DetalhesPop1 = require('./app-detalhe-pop1')
 
 // Url Firebase
 var ROOT_URL = require('../constantes').ROOT_URL;
