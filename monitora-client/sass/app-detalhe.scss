@@ -4,12 +4,12 @@
   .titulo-aplicativo {
     margin-left: 40px;
   }
-    
+
   .url {
     padding-left: 40px;
   }
 
-  .detalhe-pop1 {
+  .detalhes {
     margin: 0px;
     padding: 0px 40px;
 
@@ -36,6 +36,9 @@
   }
   .status.down {
     background-color: $color-status-down;
+  }
+  .status.unstable {
+    background-color: $color-status-unstable;
   }
 
   table {
