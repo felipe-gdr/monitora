@@ -1,4 +1,4 @@
-var React = require('react');
+﻿var React = require('react');
 var moment = require('moment');
 var _ = require('lodash');
 
@@ -31,7 +31,7 @@ module.exports = React.createClass({
 
       var tempos = {
         subiu: 0,
-        instável: 0,
+        instavel: 0,
         caiu: 0,
         total: 0
       }

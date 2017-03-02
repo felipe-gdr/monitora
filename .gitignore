@@ -1,1 +1,4 @@
-node_modules
+monitora-client/node_modules
+monitora-server/node_modules
+
+**/*log
