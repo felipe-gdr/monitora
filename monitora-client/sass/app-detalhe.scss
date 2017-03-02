@@ -1,0 +1,21 @@
+@import 'variables';
+
+.aplicativo-detalhe {
+  .titulo-aplicativo {
+    margin-left: 40px;
+  }
+
+  .url {
+    padding-left: 40px;
+  }
+
+  .detalhes {
+    margin: 0px;
+    padding: 0px 40px;
+
+    h3 {
+      font-size: 23px;
+      text-align: center;
+    }
+  }
+}

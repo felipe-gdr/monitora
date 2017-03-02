@@ -1,4 +1,6 @@
-.aplicativo-detalhe {
+@import 'variables';
+
+.aplicativo-estatisticas {
   .titulo-aplicativo {
     margin-left: 40px;
   }
@@ -18,12 +20,12 @@
         color: black;
 
         &.status-down {
-          background-color: rgb(244,67,54);
+          background-color: $color-status-down;
           color: white;
         }
 
         &.status-up {
-          background-color: rgb(0,150,136);
+          background-color: $color-status-up;
           color: white;
         }
       }
@@ -36,15 +38,15 @@
 
   .tempo-no-ar {
     .status-down {
-      color: rgb(244,67,54);
+      color: $color-status-down;
     }
 
     .status-up {
-      color: rgb(0,150,136);
+      color: $color-status-up;
     }
 
     .status-unstable {
-      color: rgb(255, 193, 7);
+      color: $color-status-unstable;
     }
   }
 

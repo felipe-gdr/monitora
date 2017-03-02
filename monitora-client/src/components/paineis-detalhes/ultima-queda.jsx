@@ -1,5 +1,5 @@
 var React = require('react');
-var Firebase = require('Firebase');
+var Firebase = require('firebase');
 var moment = require('moment');
 var _ = require('lodash');
 

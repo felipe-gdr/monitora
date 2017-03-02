@@ -1,5 +1,6 @@
 var React = require('react');
 var moment = require('moment');
+var Firebase = require('firebase');
 
 var Loading = require('../loading');
 var PainelDetalhe = require('./painel-detalhe');

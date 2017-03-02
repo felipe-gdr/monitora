@@ -45,7 +45,7 @@ module.exports = React.createClass({
       return null;
     }
 
-    return <div className="aplicativo-detalhe" >
+    return <div className="aplicativo-estatisticas" >
       <h3 className="titulo-aplicativo">
         {this.state.aplicativo.cliente} {this.state.aplicativo.nome}
       </h3>

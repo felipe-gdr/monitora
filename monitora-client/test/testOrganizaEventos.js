@@ -11,19 +11,19 @@ var emMillis = function(horario) {
 
 describe('OrganizaEventos', function () {
   describe('#eventosOrganizados', function() {
-    it('deve retornar "null" quando "eventos" é nulo', function() {
+    it('retorna "null" quando "eventos" é nulo', function() {
       var organizaEventos = new OrganizaEventos(null);
 
       assert.isNull(organizaEventos.getEventosOrganizados());
     });
 
-    it('deve retornar "null" quando "eventos" está vazio', function() {
+    it('retorna "null" quando "eventos" está vazio', function() {
       var organizaEventos = new OrganizaEventos([]);
 
       assert.isNull(organizaEventos.getEventosOrganizados());
     });
 
-    it('deve retornar uma queda e uma subida', function() {
+    it('retorna uma queda e uma subida', function() {
       var eventos = [
         {
           dataEvento: emMillis('09:43:10'),
@@ -66,7 +66,7 @@ describe('OrganizaEventos', function () {
       expect(organizaEventos.getEventosOrganizados()).to.deep.equal(eventosOrganizados);
     });
 
-    it('deve retornar uma instabilidade e uma subida', function() {
+    it('retorna uma instabilidade e uma subida', function() {
       var eventos = [
         {
           dataEvento: emMillis('09:43:10'),
@@ -105,7 +105,7 @@ describe('OrganizaEventos', function () {
       expect(organizaEventos.getEventosOrganizados()).to.deep.equal(eventosOrganizados);
     });
 
-    it('deve retornar uma subida uma instabilidade, uma subida e uma queda', function() {
+    it('retorna uma subida uma instabilidade, uma subida e uma queda', function() {
       var eventos = [
         {
           dataEvento: emMillis('07:10:00'),
