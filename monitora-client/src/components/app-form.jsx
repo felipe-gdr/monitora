@@ -18,10 +18,10 @@ module.exports = React.createClass({
   render: function () {
     return <div className="aplicativo-form">
       <div className={"formulario" + (this.state.mostra ? '' : ' esconde')}>
-        <TextField nome="Nome" onTextChanged={this.handleNomeChanged} />
-        <TextField nome="Cliente" onTextChanged={this.handleClienteChanged} />
+        <TextField nome="Nome x" onTextChanged={this.handleNomeChanged} />
+        <TextField nome="Cliente x" onTextChanged={this.handleClienteChanged} />
         <br />
-        <TextField nome="Url" onTextChanged={this.handleUrlChanged} className="input-grande" />
+
         <div className="acoes">
           <Botao
             icone="done"

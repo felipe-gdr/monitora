@@ -1,0 +1,32 @@
+@import 'variables';
+
+.server-grid {
+  .server-card {
+    width: 100%;
+    min-height: 130px;
+
+    .mdl-card__supporting-text {
+      overflow: auto;
+    }
+
+    .title {
+      font-size: 16px;
+      padding-bottom: 0;
+      color: #777;
+    }
+
+    .conteudo {
+      padding:0;
+    }
+  }
+
+  .status {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
+
+  table {
+    width: 100%;
+  }
+}

@@ -2,6 +2,8 @@ var React = require('react');
 var Mensagens = require('./mensagens');
 var Link = require('react-router').Link;
 
+var Menu = require('./menu');
+
 module.exports = React.createClass({
   render: function() {
     return  <header className="mdl-layout__header mdl-layout__header--scroll header">
@@ -25,6 +27,7 @@ module.exports = React.createClass({
             </label>
           </a>
           <Mensagens eventos={this.props.eventos} handleFechaMensagens={this.props.handleFechaMensagens}/>
+<Menu />          
         </nav>
       </div>
     </header>

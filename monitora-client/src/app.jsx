@@ -16,7 +16,6 @@ var Header = require('./components/header');
 var AppGrid = require('./components/app-grid');
 var ServerGrid = require('./components/server-grid');
 var ServerTable = require('./components/server-table');
-var Menu = require('./components/menu');
 var AppForm = require('./components/app-form');
 var AtualizacaoDisplay = require('./components/atualizacao-display');
 var Notificacao = require('./components/notificacao');
@@ -50,13 +49,15 @@ var Main = React.createClass({
 
     return  <div>
       <div className="mdl-layout mdl-js-layout">
-        <Header eventos={this.state.eventos} aplicativos={this.state.aplicativos} handleFechaMensagens={this.handleFechaMensagens} />
+        <Header
+          eventos={this.state.eventos}
+          aplicativos={this.state.aplicativos}
+          handleFechaMensagens={this.handleFechaMensagens} />
         <main className="mdl-layout__content">
           {/*<AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>*/}
           <AppForm aplicativosStore={this.firebaseRefs.aplicativos}/>
           {children}
         </main>
-        {/*<Menu />*/}
       </div>
       <Notificacao ref="notificacao"/>
     </div>

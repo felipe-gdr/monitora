@@ -3,29 +3,113 @@ var React = require('react');
 var OrganizaServidores = require('../servicos/organiza-servidores');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {appsFiltrados: []}
+  },
+
+  componentDidMount() {
+    const apps = new OrganizaServidores(this.props.aplicativos).getListaAplicativos()
+
+    this.setState({ appsFiltrados: apps, appsTodos: apps })
+  },
+
+  componentWillReceiveProps() {
+    const apps = new OrganizaServidores(this.props.aplicativos).getListaAplicativos()
+
+    this.setState({ appsFiltrados: apps, appsTodos: apps })
+  },
+
+  applyFilters() {
+    const ip      = document.querySelector('#ip').value,
+          tipo    = document.querySelector('#tipo').value,
+          cliente = document.querySelector('#cliente').value
+
+    let appsFiltrados = this.state.appsTodos
+
+    if(ip) {
+      appsFiltrados = _.filter(appsFiltrados, {'ip': ip})
+    }
+
+    if(tipo) {
+      appsFiltrados = _.filter(appsFiltrados, {'tipo': tipo})
+    }
+
+    if(cliente) {
+      appsFiltrados = _.filter(appsFiltrados, {'cliente': cliente})
+    }
+
+    if(status) {
+      appsFiltrados = _.filter(appsFiltrados, {'status': status})
+    }
+
+    this.setState({ appsFiltrados })
+  },
+
   render: function() {
-    var apps = new OrganizaServidores(this.props.aplicativos).getListaAplicativos();
-    if(!apps) {
+    var { appsFiltrados, appsTodos } = this.state
+
+    if(!appsTodos) {
       return null;
     }
 
+    const ips = _(appsTodos).map('ip').uniq().sortBy().value(),
+          tipos = _(appsTodos).map('tipo').uniq().sortBy().value(),
+          clientes = _(appsTodos).map('cliente').sortBy().uniq().value(),
+          statuses = _(appsTodos).map('status').sortBy().uniq().value()
+
     return (
-      <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-        <thead>
-          <tr>
-            <th className="mdl-data-table__cell--non-numeric">IP</th>
-            <th className="mdl-data-table__cell--non-numeric">Tipo</th>
-            <th className="mdl-data-table__cell--non-numeric">Cliente</th>
-            <th className="mdl-data-table__cell--non-numeric">Aplicativo</th>
-            <th className="mdl-data-table__cell--non-numeric">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            apps.map((app) => this.renderAplicativo(app))
-          }
-        </tbody>
-      </table>
+      <div className="server-table">
+        <div className="filters">
+          <div className="field">
+            <label htmlFor="ip">IP: </label>
+            <select id="ip" onChange={this.applyFilters}>
+              <option value="">selecionar...</option>
+              {ips.map((ip)=> (<option key={ip} value={ip}>{ip}</option>) )}
+            </select>
+          </div>
+
+          <div className="field">
+            <label htmlFor="tipo">Tipo: </label>
+            <select id="tipo" onChange={this.applyFilters}>
+              <option value="">selecionar...</option>
+              {tipos.map((tipo)=> (<option key={tipo} value={tipo}>{tipo}</option>) )}
+            </select>
+          </div>
+
+          <div className="field">
+            <label htmlFor="cliente">Cliente: </label>
+            <select id="cliente" onChange={this.applyFilters}>
+              <option value="">selecionar...</option>
+              {clientes.map((cliente)=> (<option key={cliente} value={cliente}>{cliente}</option>) )}
+            </select>
+          </div>
+
+          <div className="field">
+            <label htmlFor="status">Status: </label>
+            <select id="status" onChange={this.applyFilters}>
+              <option value="">selecionar...</option>
+              {statuses.map((status)=> (<option key={status} value={status}>{status}</option>) )}
+            </select>
+          </div>
+
+        </div>
+        <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead>
+            <tr>
+              <th className="mdl-data-table__cell--non-numeric">IP</th>
+              <th className="mdl-data-table__cell--non-numeric">Tipo</th>
+              <th className="mdl-data-table__cell--non-numeric">Cliente</th>
+              <th className="mdl-data-table__cell--non-numeric">Aplicativo</th>
+              <th className="mdl-data-table__cell--non-numeric">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              appsFiltrados.map((app) => this.renderAplicativo(app))
+            }
+          </tbody>
+        </table>
+      </div>
     )
   },
 
