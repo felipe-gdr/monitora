@@ -4,16 +4,6 @@ var Link = require('react-router').Link;
 
 module.exports = React.createClass({
   render: function () {
-    // return <div className="mdl-layout__drawer">
-    //   <span className="mdl-layout-title">Monitoramento</span>
-    //   <nav className="mdl-navigation">
-    //     <a className="mdl-navigation__link" href="">Grid</a>
-    //     <a className="mdl-navigation__link" href="">Configuração</a>
-    //     <a className="mdl-navigation__link" href="">Link</a>
-    //     <a className="mdl-navigation__link" href="">Link</a>
-    //   </nav>
-    // </div>
-
     return (
       <div className="menu">
         <button id="demo-menu-lower-right"
