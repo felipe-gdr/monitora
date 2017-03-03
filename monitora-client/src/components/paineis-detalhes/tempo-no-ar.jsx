@@ -75,7 +75,7 @@ module.exports = React.createClass({
             <li className="mdl-list__item">
               <span className="mdl-list__item-primary-content">
                 <i className="material-icons mdl-list__item-icon status-unstable">arrow_downward</i>
-                Instável: {(this.state.porcentagemInstavel * 100).toFixed(2)}%
+                Instavel: {(this.state.porcentagemInstavel * 100).toFixed(2)}%
               </span>
             </li>
             <li className="mdl-list__item">

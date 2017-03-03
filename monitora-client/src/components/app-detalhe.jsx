@@ -47,7 +47,7 @@ module.exports = React.createClass({
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--12-col"><h3>Web</h3></div>
 
-            <div className="mdl-cell mdl-cell--1-col label">Versão</div>
+            <div className="mdl-cell mdl-cell--1-col label">Versao</div>
             <div className="mdl-cell mdl-cell--3-col value">{versaoWeb}</div>
 
             <div className="mdl-cell mdl-cell--2-col label">IP Servidor</div>
@@ -81,9 +81,9 @@ module.exports = React.createClass({
 
       return (
         <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--12-col"><h3>Cálculo</h3></div>
+          <div className="mdl-cell mdl-cell--12-col"><h3>Calculo</h3></div>
 
-          <div className="mdl-cell mdl-cell--2-col label">Versão</div>
+          <div className="mdl-cell mdl-cell--2-col label">Versao</div>
           <div className="mdl-cell mdl-cell--2-col value">{versaoCalculo}</div>
 
           <div className="mdl-cell mdl-cell--2-col label">Up </div>

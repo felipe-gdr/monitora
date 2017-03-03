@@ -13,7 +13,7 @@ module.exports = React.createClass({
     }
 
     return <div className="atualizacao-display">
-      Última atualização: {new Moment(this.props.dataUltimaAtualizacao).fromNow()}
+      Última atualizaçao: {new Moment(this.props.dataUltimaAtualizacao).fromNow()}
     </div>
 
   }
