@@ -13,8 +13,12 @@ cache:
 env:
   global:
     - NODE_VERSION=6.9.5
+before_install:
+    - cd monitora-client
 install:
-  - monitora-client/gulp prod
+  - gulp prod
+before_script:
+    - cd monitora-client  
 script:
   - monitora-client/npm test
 notifications:
