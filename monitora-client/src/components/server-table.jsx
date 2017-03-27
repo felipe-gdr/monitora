@@ -23,6 +23,7 @@ module.exports = React.createClass({
     const ip      = document.querySelector('#ip').value,
           tipo    = document.querySelector('#tipo').value,
           cliente = document.querySelector('#cliente').value,
+          versao  = document.querySelector('#versao').value,
           status  = document.querySelector('#status').value
 
     let appsFiltrados = this.state.appsTodos
@@ -37,6 +38,10 @@ module.exports = React.createClass({
 
     if(cliente) {
       appsFiltrados = _.filter(appsFiltrados, {'cliente': cliente})
+    }
+
+    if(versao) {
+      appsFiltrados = _.filter(appsFiltrados, {'versao': versao})
     }
 
     if(status) {
@@ -56,6 +61,7 @@ module.exports = React.createClass({
     const ips = _(appsTodos).map('ip').uniq().sortBy().value(),
           tipos = _(appsTodos).map('tipo').uniq().sortBy().value(),
           clientes = _(appsTodos).map('cliente').sortBy().uniq().value(),
+          versoes = _(appsTodos).map('versao').sortBy().uniq().value(),
           statuses = _(appsTodos).map('status').sortBy().uniq().value()
 
     return (
@@ -86,6 +92,14 @@ module.exports = React.createClass({
           </div>
 
           <div className="field">
+            <label htmlFor="versao">Versao: </label>
+            <select id="versao" onChange={this.applyFilters}>
+              <option value="">selecionar...</option>
+              {versoes.map((versao)=> (<option key={versao} value={versao}>{versao}</option>) )}
+            </select>
+          </div>
+
+          <div className="field">
             <label htmlFor="status">Status: </label>
             <select id="status" onChange={this.applyFilters}>
               <option value="">selecionar...</option>
@@ -101,6 +115,7 @@ module.exports = React.createClass({
               <th className="mdl-data-table__cell--non-numeric">Tipo</th>
               <th className="mdl-data-table__cell--non-numeric">Cliente</th>
               <th className="mdl-data-table__cell--non-numeric">Aplicativo</th>
+              <th className="mdl-data-table__cell--non-numeric">Versao</th>
               <th className="mdl-data-table__cell--non-numeric">Status</th>
             </tr>
           </thead>
@@ -126,6 +141,9 @@ module.exports = React.createClass({
             <a href={app.url} target="_blank">{app.nomeApp}</a>
           }
           { !app.url && app.nomeApp }
+        </td>
+        <td className="mdl-data-table__cell--non-numeric">
+          {app.versao}
         </td>
         <td className="mdl-data-table__cell--non-numeric">
           <div

@@ -23,7 +23,8 @@ OrganizaServidores.prototype.getListaAplicativos = function() {
           nomeApp: app.nome,
           cliente: app.cliente,
           url: app.url,
-          status: app.status
+          status: app.status,
+          versao: app.versao
         })
       })
     })
@@ -61,7 +62,8 @@ OrganizaServidores.prototype._organizaServidoresWeb = function() {
       cliente: app.cliente,
       nome: app.nome,
       status: app.status,
-      url: app.url
+      url: app.url,
+      versao: app.detalhesServidor.versaoPopulis || app.detalhesServidor.versaoPopulisWeb
     })
   })
 
@@ -94,7 +96,8 @@ OrganizaServidores.prototype._organizaServidoresCalculo = function() {
         cliente: app.cliente,
         nome: calc.versaoPopulisCalculo,
         status: calc.statusPopulisCalculo == '1' ? 'up' : 'down',
-        url: null
+        url: null,
+        versao: calc.servicoVersionPopulisCalculo
       })
 
     })
