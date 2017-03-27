@@ -11,6 +11,7 @@ var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
+var ignore = require('gulp-ignore');
 
 var notify = function(error) {
   console.log('erro', error);
@@ -59,7 +60,9 @@ function bundleProd() {
     .bundle()
     .on('error', notify)
     .pipe(source('main.js'))
-    .pipe(streamify(uglify()))
+    .pipe(ignore.exclude([ "**/*.map" ]))
+    //TODO @felipereis: comentado pois o Uglify estava gerando erro de parsing
+    //.pipe(streamify(uglify().on('error', gutil.log)))
     .pipe(gulp.dest('./'))
 }
 
@@ -101,4 +104,6 @@ gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
-gulp.task('prod', ['bundleProd', 'sass']);
+gulp.task('prod', ['build', 'sass'], function() {
+  return gutil.log("Completed!")
+});
