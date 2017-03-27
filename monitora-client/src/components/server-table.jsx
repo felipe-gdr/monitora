@@ -111,7 +111,7 @@ module.exports = React.createClass({
         <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
           <thead>
             <tr>
-              <th className="mdl-data-table__cell--non-numeric">IP</th>
+              <th className="mdl-data-table__cell--non-numeric">Servidor</th>
               <th className="mdl-data-table__cell--non-numeric">Tipo</th>
               <th className="mdl-data-table__cell--non-numeric">Cliente</th>
               <th className="mdl-data-table__cell--non-numeric">Aplicativo</th>
@@ -130,9 +130,11 @@ module.exports = React.createClass({
   },
 
   renderAplicativo: function(app) {
+    var servidor = app.nomeServidor ? `${app.ip} (${app.nomeServidor})` : app.ip
+
     return (
       <tr key={app.cliente + app.nomeApp}>
-        <td className="mdl-data-table__cell--non-numeric">{app.ip}</td>
+        <td className="mdl-data-table__cell--non-numeric">{servidor}</td>
         <td className="mdl-data-table__cell--non-numeric">{app.tipo}</td>
         <td className="mdl-data-table__cell--non-numeric">{app.cliente}</td>
         <td className="mdl-data-table__cell--non-numeric">
