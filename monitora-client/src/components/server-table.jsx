@@ -22,7 +22,8 @@ module.exports = React.createClass({
   applyFilters() {
     const ip      = document.querySelector('#ip').value,
           tipo    = document.querySelector('#tipo').value,
-          cliente = document.querySelector('#cliente').value
+          cliente = document.querySelector('#cliente').value,
+          status  = document.querySelector('#status').value
 
     let appsFiltrados = this.state.appsTodos
 
