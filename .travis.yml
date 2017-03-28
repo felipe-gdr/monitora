@@ -15,7 +15,8 @@ env:
     - NODE_VERSION=6.9.5
 before_install:
     - cd monitora-client
-    - npm install gulp vinyl-source-stream browserify
+    - npm install gulp 
+    - npm install 
 install:
   - gulp prod
 before_script:
