@@ -1,6 +1,6 @@
 var moment = require('moment');
 
-module.exports = OrganizaEventos = function(eventos) {
+var OrganizaEventos = function(eventos) {
   this.eventos = eventos;
 }
 
@@ -63,3 +63,5 @@ OrganizaEventos.prototype.getEventosOrganizados = function() {
 
     return eventosOrganizadosFinal;
 }
+
+module.exports = OrganizaEventos

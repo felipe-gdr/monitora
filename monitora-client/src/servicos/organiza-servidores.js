@@ -1,7 +1,6 @@
-var moment = require('moment');
 var _ = require('lodash');
 
-module.exports = OrganizaServidores = function(aplicativos) {
+var OrganizaServidores = function(aplicativos) {
   this.aplicativos = aplicativos
 }
 
@@ -33,7 +32,7 @@ OrganizaServidores.prototype.getListaAplicativos = function() {
 }
 
 OrganizaServidores.prototype.getServidoresOrganizados = function() {
-    if(!this.aplicativos || this.aplicativos.length == 0) {
+    if(!this.aplicativos || this.aplicativos.length === 0) {
       return null;
     }
 
@@ -74,7 +73,7 @@ OrganizaServidores.prototype._organizaServidoresCalculo = function() {
   var servers = {}
 
   this.aplicativos.forEach((app) => {
-    var calculos = _.filter(app.detalhesServidor.calculos, (calc) => calc.emUsoPopulisCalculo == 'S');
+    var calculos = _.filter(app.detalhesServidor.calculos, (calc) => calc.emUsoPopulisCalculo === 'S');
 
     if(!calculos) {
       return servers;
@@ -95,7 +94,7 @@ OrganizaServidores.prototype._organizaServidoresCalculo = function() {
       servers[ip].apps.push({
         cliente: app.cliente,
         nome: calc.versaoPopulisCalculo,
-        status: calc.statusPopulisCalculo == '1' ? 'up' : 'down',
+        status: calc.statusPopulisCalculo === '1' ? 'up' : 'down',
         url: null,
         versao: calc.servicoVersionPopulisCalculo
       })
@@ -105,3 +104,5 @@ OrganizaServidores.prototype._organizaServidoresCalculo = function() {
 
   return _.values(servers);
 }
+
+module.exports = OrganizaServidores

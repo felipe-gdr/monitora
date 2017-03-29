@@ -1,32 +1,20 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 var ReactFire = require('reactfire');
 var Firebase = require('firebase');
 var _ = require('lodash');
 
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRedirect = ReactRouter.IndexRedirect;
-var hashHistory = ReactRouter.hashHistory;
-
 // Componentes
-var Botao = require('./components/botao');
 var Header = require('./components/header');
-var AppGrid = require('./components/app-grid');
-var ServerGrid = require('./components/server-grid');
-var ServerTable = require('./components/server-table');
+
 var AppForm = require('./components/app-form');
-var AtualizacaoDisplay = require('./components/atualizacao-display');
 var Notificacao = require('./components/notificacao');
-var AppDetalhe = require('./components/app-detalhe');
 
 // Url Firebase
 var ROOT_URL = require('./constantes').ROOT_URL;
 
 var eventosNovos = false;
 
-var Main = React.createClass({
+module.exports = React.createClass({
   mixins: [ReactFire],
   getInitialState: function () {
     return {
@@ -92,18 +80,3 @@ var Main = React.createClass({
   }
 
 });
-
-var routes = (
-  <Router history={hashHistory}>
-    <Route path="/" component={Main}>
-      <Route path="app" component={AppGrid} />
-      <Route path="app/:app" component={AppDetalhe} />
-      <Route path="server" component={ServerGrid} />
-      <Route path="server-table" component={ServerTable} />
-      <IndexRedirect to="app" />
-    </Route>
-  </Router>
-);
-
-//var element = React.createElement(Main, {});
-ReactDOM.render(routes, document.querySelector('.container'));

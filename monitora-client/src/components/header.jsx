@@ -2,13 +2,14 @@ var React = require('react');
 var Mensagens = require('./mensagens');
 var Link = require('react-router').Link;
 
+var logo = require('../../images/monitora-down.png')
 var Menu = require('./menu');
 
 module.exports = React.createClass({
   render: function() {
     return  <header className="mdl-layout__header mdl-layout__header--scroll header">
       <div className="mdl-layout__header-row">
-        <img className="logo" src="imagens/monitora-down.png" />
+        <img className="logo" src={logo} alt="logo"/>
         <span className="mdl-layout-title"><Link to="/app" className="mdl-navigation__link">Monitoramento</Link></span>
         <div className="mdl-layout-spacer"></div>
         <nav className="mdl-navigation">
@@ -34,12 +35,12 @@ module.exports = React.createClass({
   },
   qtdeUp: function() {
       return this.props.aplicativos.filter(function(aplicativo) {
-        return aplicativo.status == 'up';
+        return aplicativo.status === 'up';
       }).length;
   },
   qtdeDown: function() {
       return this.props.aplicativos.filter(function(aplicativo) {
-        return aplicativo.status != 'up';
+        return aplicativo.status !== 'up';
       }).length;
   }
 });

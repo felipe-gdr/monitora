@@ -12,7 +12,7 @@ module.exports = React.createClass({
     return <div className="mensagens">
       <a className="mdl-navigation__link"
         onClick={this.handleClick}
-        href="javascript:void(0)">
+        href="#">
         <div
           className="material-icons mdl-badge mdl-badge--overlap"
           data-badge={this.props.eventos.length}>

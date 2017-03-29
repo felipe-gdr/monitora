@@ -2,7 +2,6 @@ var React = require('react');
 var ReactFire = require('reactfire');
 var Firebase = require('firebase');
 var _ = require('lodash');
-var moment = require('moment');
 
 // Url Firebase
 var ROOT_URL = require('../constantes').ROOT_URL;
@@ -74,9 +73,9 @@ module.exports = React.createClass({
         return null;
       }
 
-      var calculos = _.filter(detalhes.calculos, (calc) => calc.emUsoPopulisCalculo == 'S')
+      var calculos = _.filter(detalhes.calculos, (calc) => calc.emUsoPopulisCalculo === 'S')
       var versaoCalculo = _.find(calculos, (calc) => calc.servicoVersionPopulisCalculo).servicoVersionPopulisCalculo
-      var calculosUp = _.filter(calculos, (calc) => calc.statusPopulisCalculo == 1).length
+      var calculosUp = _.filter(calculos, (calc) => calc.statusPopulisCalculo === 1).length
       var calculosDown = calculos.length - calculosUp
 
       return (
@@ -111,7 +110,7 @@ module.exports = React.createClass({
                         <td className="mdl-data-table__cell--non-numeric">
                           <div
                             title={calc.statusStrPopulisCalculo}
-                            className={'status ' + (calc.statusPopulisCalculo == 1 ? 'up' : 'down')}></div>
+                            className={'status ' + (calc.statusPopulisCalculo === 1 ? 'up' : 'down')}></div>
                         </td>
                       </tr>
                     )
@@ -132,7 +131,7 @@ module.exports = React.createClass({
         return null;
       }
 
-      var nodesUp = _.filter(cluster, (node) => node.status == 'up').length
+      var nodesUp = _.filter(cluster, (node) => node.status === 'up').length
       var nodesDown = Object.keys(cluster).length - nodesUp
 
       return (

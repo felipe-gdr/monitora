@@ -20,7 +20,7 @@ module.exports = React.createClass({
       var children = [];
 
       for(var key in aplicativos) {
-        if(key != '.key') {
+        if(key !== '.key') {
           var aplicativo = aplicativos[key];
           aplicativo.key = key;
 
