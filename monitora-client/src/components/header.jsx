@@ -2,7 +2,7 @@ var React = require('react');
 var Mensagens = require('./mensagens');
 var Link = require('react-router').Link;
 
-var logo = require('../../images/monitora-down.png')
+var logo = require('../../public/images/monitora-down.png')
 var Menu = require('./menu');
 
 module.exports = React.createClass({
