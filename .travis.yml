@@ -1,27 +1,35 @@
 os:
-  - linux
+- linux
 services:
-  - docker
+- docker
 language: node_js
 node_js:
-  - "6.9.5"
+- 6.9.5
 sudo: false
 cache:
   directories:
-    - monitora-client/node_modules
-    - monitora-server/node_modules
+  - monitora-client/node_modules
+  - monitora-server/node_modules
 env:
   global:
-    - NODE_VERSION=6.9.5
+  - NODE_VERSION=6.9.5
 before_install:
-    - cd monitora-client
-    - npm install -g create-react-app
+- cd monitora-client
+- npm install -g create-react-app
 install:
-  - npm install
+- npm install
 script:
-  - npm test
+- npm test
 notifications:
   webhooks:
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: false     # default: false
+    on_success: change
+    on_failure: always
+    on_start: false
+before-deploy:
+deploy:
+  provider: heroku
+  api_key:
+    secure: rn7K5e55hZEVsfV7eEbxp1XxCmrTLM5Kz5Lr81QRhmpTzdoFyzfRZGHKgz6qIJAgveJE26E4KfX+dCSHcadmkVKRUOHjTOMbCeRWZRpPc9X9PzF1n+cg71zGyYGbobmy0gtqPodNkxtuq0Ryv0cdEASNgzxx9e0F+AeRyUooKW97+Y89dkg63UzybuMYaZOjk6zyAF80zAM/6sGFP6oKq3RrmxBRT9oajALqcgXP64YRMt/PbUvMyFa6f/beGNknpjgFCWJlZwa7ZyL5LTw695ZfuOxOtBojEMPdxy3YVsCbvSQvjECBPFIkl2/wprXHiYPwYzlL7U/mAebISKX7H45yv9QMy+8vaTCMyJtomAzGlaQC8YmPrWLn2DMJM44u3FwnNuu1kMKf3fq5/u+QICEzttmtDYg6PUCOPnDqbAHHoEFeUrr2LoZSxdQ1+bk1lzNJogas5lRdwbeXFrxEFqtFBIdjDqoWzl9T8nLgsT/LJB6X1Yj5Me3XiuS+J3d2PPUtNSQZVVePrAm6ySusuIGhgy8Nj1BQgujCAXAv7L5W3ot12LDiVOPXOC6r4cYaY6vGdv4lPx/QYw2/+H7PYzhIpgSHwfBx+uWz+D+GEp9BiPAeVRi1lBdAfUQu6YDnxM8CRQiDvAlmb2vC5TUIU9pFqxFh4Vu+QoCKqPJHrZE=
+  app: monitora-client
+  on:
+    repo: felipe-gdr/monitora
