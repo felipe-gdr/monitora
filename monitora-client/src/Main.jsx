@@ -4,6 +4,7 @@ var Firebase = require('firebase');
 var _ = require('lodash');
 
 // Componentes
+var Favicon = require('./components/favicon');
 var Header = require('./components/header');
 
 var AppForm = require('./components/app-form');
@@ -36,6 +37,7 @@ module.exports = React.createClass({
     var children = React.cloneElement(this.props.children, {aplicativos: this.state.aplicativos});
 
     return  <div>
+      <Favicon aplicativos={this.state.aplicativos}/>
       <div className="mdl-layout mdl-js-layout">
         <Header
           eventos={this.state.eventos}
