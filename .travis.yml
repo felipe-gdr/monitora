@@ -15,14 +15,13 @@ env:
     - NODE_VERSION=6.9.5
 before_install:
     - cd monitora-client
-    - npm install gulp 
-    - npm install 
+    - npm install -g create-react-app
 install:
-  - gulp prod
+  - npm install
 before_script:
     - cd monitora-client  
 script:
-  - monitora-client/npm test
+  - npm test
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
