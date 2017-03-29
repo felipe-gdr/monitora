@@ -18,8 +18,6 @@ before_install:
     - npm install -g create-react-app
 install:
   - npm install
-before_script:
-    - cd monitora-client  
 script:
   - npm test
 notifications:
