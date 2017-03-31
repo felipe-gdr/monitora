@@ -1,3 +1,5 @@
+![https://travis-ci.org/felipe-gdr/monitora](https://travis-ci.org/felipe-gdr/monitora.svg?branch=master)
+
 # Monitora
 
 Monitora observa aplicativos web para verificar quando eles caíram.
