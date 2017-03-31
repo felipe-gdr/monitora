@@ -23,7 +23,9 @@
     "codecov.io": "^0.1.6",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
+    "enzyme": "^2.8.0",
     "node-sass": "^4.5.1",
+    "react-addons-test-utils": "^0.14.8",
     "react-scripts": "0.9.5"
   },
   "scripts": {
@@ -35,7 +37,7 @@
     "start": "react-scripts start",
     "test:watch": "react-scripts test --env=jsdom",
     "test:report": "react-scripts test --env=jsdom --coverage",
-    "watch-css": "npm run build-css && node-sass sass/main.scss -o sass/ --watch --recursive"    
+    "watch-css": "npm run build-css && node-sass sass/main.scss -o sass/ --watch --recursive"
   },
   "czConfig": {
     "path": "monitora-client/node_modules/cz-conventional-changelog"
