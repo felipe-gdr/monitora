@@ -14,12 +14,14 @@ env:
   global:
   - NODE_VERSION=6.9.5
 before_install:
-- cd monitora-client
-- npm install -g create-react-app
+  - cd monitora-client
+  - npm install -g create-react-app
 install:
-- npm install
+  - npm install
 script:
-- npm run test:report
+  - npm run test:report
+after_success:
+  - npm run report-coverage
 notifications:
   webhooks:
     on_success: change
