@@ -44,15 +44,6 @@ module.exports = React.createClass({
       <li>IP: {this.props.detalhesServidor.ipServidor}</li>
     </ul>;
   },
-  icone: function () {
-    if(this.props.status === 'up') {
-      return "check";
-    } else if(this.props.status === 'down') {
-      return "warning";
-    } else {
-      return "";
-    }
-  },
   cluster: function () {
     if(this.props.cluster) {
       var nodes = _.values(this.props.cluster).map(function (node) {
