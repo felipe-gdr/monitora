@@ -1,4 +1,5 @@
 ![https://travis-ci.org/felipe-gdr/monitora](https://travis-ci.org/felipe-gdr/monitora.svg?branch=master)
+[![codecov](https://codecov.io/gh/felipe-gdr/monitora/branch/master/graph/badge.svg)](https://codecov.io/gh/felipe-gdr/monitora)
 
 # Monitora
 
