@@ -20,17 +20,23 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
     "node-sass": "^4.5.1",
     "nyc": "^10.2.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
     "build-css": "node-sass sass/main.scss -o sass/",
+    "commit": "git-cz",
     "watch-css": "npm run build-css && node-sass sass/main.scss -o sass/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test:watch": "react-scripts test --env=jsdom",
     "test:report": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
+  },
+  "czConfig": {
+    "path": "monitora-client/node_modules/cz-conventional-changelog"
   }
 }
