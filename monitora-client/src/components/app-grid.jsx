@@ -11,9 +11,9 @@ module.exports = React.createClass({
   },
   renderAplicativos: function() {
     var aplicativos = this.props.aplicativos;
-
+    
     if(!aplicativos) {
-      return <h4>
+      return <h4 className="info">
         Inclua aplicativos para começar
       </h4>
     } else {
