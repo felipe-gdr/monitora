@@ -13,6 +13,9 @@ var Notificacao = require('./components/notificacao');
 // Url Firebase
 var ROOT_URL = require('./constantes').ROOT_URL;
 
+// package.json
+var version = require('../package.json').version
+
 var eventosNovos = false;
 
 module.exports = React.createClass({
@@ -48,6 +51,7 @@ module.exports = React.createClass({
           <AppForm aplicativosStore={this.firebaseRefs.aplicativos}/>
           {children}
         </main>
+        <footer className="footer">v. {version} </footer>
       </div>
       <Notificacao ref="notificacao"/>
     </div>
