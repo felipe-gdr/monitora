@@ -1,44 +1,16 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
+import _ from 'lodash'
 
 import AppCard from '../src/components/app-card';
 
+import { appComplete } from './apps'
 
 let app = {}
 
 describe('App', function() {
   beforeEach(function(){
-    app = {
-        'nome': 'aplicativo',
-        'cliente': 'empresa2',
-        'url': 'http//www.app2.com',
-        'status': 'up',
-        'detalhesServidor': {
-          'versaoPopulis': '1.0.0',
-          'nomePcServidor': 'server01',
-          'ipServidor': '192.168.1.10',
-          'calculos': [
-            {
-              'emUsoPopulisCalculo': 'S',
-              'statusPopulisCalculo': '1'
-            },
-            {
-              'emUsoPopulisCalculo': 'S',
-              'statusPopulisCalculo': '1'
-            }        
-          ]
-        },
-        'cluster': {
-          'master': {
-            'nomeNode': 'master',
-            'status': 'up'
-          },
-          'slave': {
-            'nomeNode': 'slave',
-            'status': 'up'
-          }      
-        }
-      }    
+    app = _.cloneDeep(appComplete)
   });
 
   it('pode ser selecionado pela classe "app-card"', function() {

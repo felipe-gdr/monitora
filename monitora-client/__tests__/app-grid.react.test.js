@@ -3,30 +3,7 @@ import { shallow, mount, render } from 'enzyme';
 
 import AppGrid from '../src/components/app-grid';
 
-const apps = {
-  'App1': {
-    'nome': 'aplicativo',
-    'cliente': 'empresa1',
-    'url': 'http//www.app1.com',
-    'status': 'up',
-    'detalhesServidor': {
-      'versaoPopulis': '1.0.0',
-      'nomePcServidor': 'server01',
-      'ipServidor': '192.168.1.10'
-    }
-  },
-  'App2': {
-    'nome': 'aplicativo',
-    'cliente': 'empresa2',
-    'url': 'http//www.app2.com',
-    'status': 'up',
-    'detalhesServidor': {
-      'versaoPopulis': '1.0.0',
-      'nomePcServidor': 'server01',
-      'ipServidor': '192.168.1.10'
-    }
-  }
-}
+import { appList } from './apps'
 
 describe('AppGrid', function() {
   it('possui texto informativo quando não há aplicativos', function() {
@@ -39,14 +16,14 @@ describe('AppGrid', function() {
   });
 
   it('não possui texto informativo quando há aplicativos', function() {
-    expect(mount(<AppGrid aplicativos={apps}/>).find('.info').length).toBe(0);
+    expect(mount(<AppGrid aplicativos={appList}/>).find('.info').length).toBe(0);
   });
 
   it('mostra um card para cada aplicativo na lista', function() {
-    expect(mount(<AppGrid aplicativos={apps}/>).find('.app-card').length).toBe(2);
+    expect(mount(<AppGrid aplicativos={appList}/>).find('.app-card').length).toBe(2);
   });
 
   it('pode ser selecionado pela classe "app-grid"', function() {
-    expect(shallow(<AppGrid aplicativos={apps}/>).is('.app-grid')).toBe(true);
+    expect(shallow(<AppGrid aplicativos={appList}/>).is('.app-grid')).toBe(true);
   });
 });
