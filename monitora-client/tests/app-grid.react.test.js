@@ -16,14 +16,14 @@ describe('AppGrid', function() {
   });
 
   it('não possui texto informativo quando há aplicativos', function() {
-    expect(mount(<AppGrid aplicativos={appList}/>).find('.info').length).toBe(0);
+    expect(mount(<AppGrid aplicativos={appList()}/>).find('.info').length).toBe(0);
   });
 
   it('mostra um card para cada aplicativo na lista', function() {
-    expect(mount(<AppGrid aplicativos={appList}/>).find('.app-card').length).toBe(2);
+    expect(mount(<AppGrid aplicativos={appList()}/>).find('.app-card').length).toBe(2);
   });
 
   it('pode ser selecionado pela classe "app-grid"', function() {
-    expect(shallow(<AppGrid aplicativos={appList}/>).is('.app-grid')).toBe(true);
+    expect(shallow(<AppGrid aplicativos={appList()}/>).is('.app-grid')).toBe(true);
   });
 });

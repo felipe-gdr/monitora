@@ -10,7 +10,7 @@ let app = {}
 
 describe('App', function() {
   beforeEach(function(){
-    app = _.cloneDeep(appComplete)
+    app = appComplete()
   });
 
   it('pode ser selecionado pela classe "app-card"', function() {
