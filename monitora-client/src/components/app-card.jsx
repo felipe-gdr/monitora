@@ -33,9 +33,6 @@ module.exports = React.createClass({
       </div>
     </div>
   },
-  handleAbreUrlClicked: function() {
-    window.open(this.props.url,'_blank')
-  },
   detalhes: function () {
     var versaoApp = this.props.detalhesServidor.versaoPopulis || this.props.detalhesServidor.versaoPopulisWeb
     return <ul className="detalhes-app">
