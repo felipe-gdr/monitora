@@ -1,25 +1,9 @@
 var React = require('react');
-var ReactFire = require('reactfire');
-var Firebase = require('firebase');
 var _ = require('lodash');
 
-// Url Firebase
-var ROOT_URL = require('../constantes').ROOT_URL;
-
 module.exports = React.createClass({
-    mixins: [ReactFire],
-
-    getInitialState: function() {
-        return {aplicativo: null};
-    },
-
-    componentWillMount: function() {
-        this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
-        this.bindAsObject(this.fbAplicativo, 'aplicativo');
-    },
-
     render: function() {
-      var aplicativo = this.state.aplicativo
+      var aplicativo = _.find(this.props.aplicativos, {'.key': this.props.params.app})
 
       if (!aplicativo) {
           return null;
@@ -32,12 +16,11 @@ module.exports = React.createClass({
           <h6 className="url">
             <a href={aplicativo.url} target="_blank">{aplicativo.url}</a>
           </h6>
-          {this.renderDetalhes()}
+          {this.renderDetalhes(aplicativo)}
       </div>
     },
 
-    renderDetalhes: function() {
-      var aplicativo = this.state.aplicativo
+    renderDetalhes: function(aplicativo) {
       var detalhes = aplicativo.detalhesServidor
       var versaoWeb = detalhes.versaoPopulisWeb || (detalhes.versaoPopulis + '_' + detalhes.numeroBuild)
 
@@ -59,14 +42,13 @@ module.exports = React.createClass({
                 className={'status ' + aplicativo.status } />
             </div>
           </div>
-          {this.renderCalculo()}
-          {this.renderCluster()}
+          {this.renderCalculo(aplicativo)}
+          {this.renderCluster(aplicativo)}
         </div>
       )
     },
 
-    renderCalculo: function() {
-      var aplicativo = this.state.aplicativo
+    renderCalculo: function(aplicativo) {
       var detalhes = aplicativo.detalhesServidor
 
       if(!detalhes || !detalhes.calculos) {
@@ -123,8 +105,7 @@ module.exports = React.createClass({
       )
     },
 
-    renderCluster: function() {
-      var aplicativo = this.state.aplicativo
+    renderCluster: function(aplicativo) {
       var cluster = aplicativo.cluster
 
       if(!cluster) {
