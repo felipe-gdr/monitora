@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
       return (
         <div className="detalhes">
-          <div className="mdl-grid">
+          <div className="mdl-grid summary-grid">
             <div className="mdl-cell mdl-cell--12-col"><h3>Web</h3></div>
 
             <div className="mdl-cell mdl-cell--1-col label">Versao</div>
@@ -57,21 +57,21 @@ module.exports = React.createClass({
 
       var calculos = _.filter(detalhes.calculos, (calc) => calc.emUsoPopulisCalculo === 'S')
       var versaoCalculo = _.find(calculos, (calc) => calc.servicoVersionPopulisCalculo).servicoVersionPopulisCalculo
-      var calculosUp = _.filter(calculos, (calc) => calc.statusPopulisCalculo === 1).length
+      var calculosUp = _.filter(calculos, (calc) => calc.statusPopulisCalculo === '1').length
       var calculosDown = calculos.length - calculosUp
 
       return (
-        <div className="mdl-grid">
+        <div className="mdl-grid calculo-list">
           <div className="mdl-cell mdl-cell--12-col"><h3>Calculo</h3></div>
 
           <div className="mdl-cell mdl-cell--2-col label">Versao</div>
           <div className="mdl-cell mdl-cell--2-col value">{versaoCalculo}</div>
 
           <div className="mdl-cell mdl-cell--2-col label">Up </div>
-          <div className="mdl-cell mdl-cell--2-col value">{calculosUp}</div>
+          <div className="mdl-cell mdl-cell--2-col value calc-count-up">{calculosUp}</div>
 
           <div className="mdl-cell mdl-cell--2-col label">Down</div>
-          <div className="mdl-cell mdl-cell--2-col value">{calculosDown}</div>
+          <div className="mdl-cell mdl-cell--2-col value calc-count-down">{calculosDown}</div>
 
           <div className="mdl-cell mdl-cell--12-col">
             <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
@@ -92,7 +92,7 @@ module.exports = React.createClass({
                         <td className="mdl-data-table__cell--non-numeric">
                           <div
                             title={calc.statusStrPopulisCalculo}
-                            className={'status ' + (calc.statusPopulisCalculo === 1 ? 'up' : 'down')}></div>
+                            className={'status ' + (calc.statusPopulisCalculo === '1' ? 'up' : 'down')}></div>
                         </td>
                       </tr>
                     )
@@ -116,14 +116,14 @@ module.exports = React.createClass({
       var nodesDown = Object.keys(cluster).length - nodesUp
 
       return (
-        <div className="mdl-grid">
+        <div className="mdl-grid cluster-list">
           <div className="mdl-cell mdl-cell--12-col"><h3>Cluster</h3></div>
 
           <div className="mdl-cell mdl-cell--2-col"></div>
           <div className="mdl-cell mdl-cell--2-col label">Up </div>
-          <div className="mdl-cell mdl-cell--2-col value">{nodesUp}</div>
+          <div className="mdl-cell mdl-cell--2-col value node-count-up">{nodesUp}</div>
           <div className="mdl-cell mdl-cell--2-col label">Down</div>
-          <div className="mdl-cell mdl-cell--2-col value">{nodesDown}</div>
+          <div className="mdl-cell mdl-cell--2-col value node-count-down">{nodesDown}</div>
           <div className="mdl-cell mdl-cell--2-col"></div>
 
             <div className="mdl-cell mdl-cell--12-col">
