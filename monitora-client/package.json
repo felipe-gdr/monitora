@@ -1,7 +1,7 @@
 {
   "name": "monitora-client",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "firebase": "^2.4.2",
     "gulp-streamify": "^1.0.2",
