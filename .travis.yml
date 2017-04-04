@@ -16,7 +16,6 @@ env:
 before_install:
   - cd monitora-client
   - npm install -g create-react-app
-  - npm run build-css  
 install:
   - npm install
 script:
