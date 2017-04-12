@@ -42,13 +42,13 @@ ChecaAplicativo.prototype.parseDetalhesServidor = function(body) {
 ChecaAplicativo.prototype.checaStatus = function (callback) {
   this.checaAplicativo(this.data, callback);
 
-  // if(this.data.cluster) {
-  //   _.keys(this.data.cluster).forEach(function(nomeNode) {
-  //     var nodeCluster  = this.data.cluster[nomeNode];
-  //     nodeCluster.nomeNode = nomeNode;
-  //     this.checaAplicativo(nodeCluster, callback);
-  //   }.bind(this));
-  // }
+  if(this.data.cluster) {
+    _.keys(this.data.cluster).forEach(function(nomeNode) {
+      var nodeCluster  = this.data.cluster[nomeNode];
+      nodeCluster.nomeNode = nomeNode;
+      this.checaAplicativo(nodeCluster, callback);
+    }.bind(this));
+  }
 }
 
 ChecaAplicativo.prototype.checaAplicativo = function (baseApp, callback) {
@@ -107,8 +107,8 @@ ChecaAplicativo.prototype.handleError = function(baseApp, error, response) {
 };
 
 ChecaAplicativo.prototype.handleSucesso = function(baseApp, body, response) {
-  var detalhesServidorAntigo = baseApp.detalhesServidor
-  var detalhesServidorNovo = this.parseDetalhesServidor(body)
+  var detalhesServidorAntigo = _.omit(baseApp.detalhesServidor, ['ipServidor', 'nomePcServidor'])
+  var detalhesServidorNovo = _.omit(this.parseDetalhesServidor(body), ['ipServidor', 'nomePcServidor'])
   
   baseApp.detalhesServidor = detalhesServidorNovo
 
