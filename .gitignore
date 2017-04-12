@@ -1,4 +1,5 @@
 monitora-client/node_modules
 monitora-server/node_modules
 
-**/*log
+monitora-server/*.log
+monitora-server/daemon/*.log
