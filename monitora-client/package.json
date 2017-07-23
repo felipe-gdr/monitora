@@ -1,6 +1,6 @@
 {
   "name": "monitora-client",
-  "version": "1.0.0",
+  "version": "1.1.0-SNAPSHOT",
   "private": false,
   "dependencies": {
     "firebase": "^2.4.2",
@@ -19,14 +19,17 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.24.1",
     "chai": "^3.5.0",
     "codecov.io": "^0.1.6",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "enzyme": "^2.8.0",
+    "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.1",
     "react-addons-test-utils": "^0.14.8",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "webpack": "^3.3.0"
   },
   "scripts": {
     "build": "react-scripts build",
@@ -37,7 +40,8 @@
     "start": "react-scripts start",
     "test:watch": "react-scripts test --env=jsdom",
     "test:report": "react-scripts test --env=jsdom --coverage",
-    "watch-css": "npm run build-css && node-sass sass/main.scss -o sass/ --watch --recursive"
+    "watch-css": "npm run build-css && node-sass sass/main.scss -o sass/ --watch --recursive",
+    "webpack": "webpack"
   },
   "czConfig": {
     "path": "monitora-client/node_modules/cz-conventional-changelog"
