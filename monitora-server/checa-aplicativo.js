@@ -107,9 +107,9 @@ ChecaAplicativo.prototype.handleError = function(baseApp, error, response) {
 };
 
 ChecaAplicativo.prototype.handleSucesso = function(baseApp, body, response) {
-  var detalhesServidorAntigo = _.omit(baseApp.detalhesServidor, ['ipServidor', 'nomePcServidor'])
-  var detalhesServidorNovo = _.omit(this.parseDetalhesServidor(body), ['ipServidor', 'nomePcServidor'])
-  
+  var detalhesServidorAntigo = baseApp.detalhesServidor
+  var detalhesServidorNovo = this.parseDetalhesServidor(body)
+
   baseApp.detalhesServidor = detalhesServidorNovo
 
   if(baseApp.statusAnterior != 'up') {
@@ -118,7 +118,7 @@ ChecaAplicativo.prototype.handleSucesso = function(baseApp, body, response) {
     baseApp.ultimaAlteracao = 'subiu';
 
     return this.label(baseApp) + " subiu";
-  } else if(!_.isEqual(detalhesServidorNovo, detalhesServidorAntigo)) { 
+  } else if(!_.isEqual(detalhesServidorNovo, detalhesServidorAntigo)) {
     return this.label(baseApp) + " atualizou";
   } else {
     return null;
