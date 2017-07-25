@@ -4,7 +4,8 @@
   "description": "backend do serviço de monitoração",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/*"
+    "test": "mocha tests/*",
+    "commit": "git-cz"
   },
   "author": "Felipe Reis",
   "license": "ISC",
@@ -15,6 +16,11 @@
     "request": "^2.70.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0"
+  },
+  "czConfig": {
+    "path": "monitora-client/node_modules/cz-conventional-changelog"
   }
 }
