@@ -1,46 +1,43 @@
-var React = require('react');
-var Mensagens = require('./mensagens');
-var Link = require('react-router').Link;
+import React from 'react';
+import Mensagens from './mensagens';
+import { Link } from 'react-router';
+import logo from '../../public/images/monitora-down.png';
+import Menu from './menu';
 
-var logo = require('../../public/images/monitora-down.png')
-var Menu = require('./menu');
-
-module.exports = React.createClass({
-    render: function () {
-        return <header className="mdl-layout__header mdl-layout__header--scroll header">
-            <div className="mdl-layout__header-row">
-                <img className="logo" src={logo} alt="logo"/>
-                <span className="mdl-layout-title"><Link to="/app" className="mdl-navigation__link">Monitoramento</Link></span>
-                <div className="mdl-layout-spacer"></div>
-                <nav className="mdl-navigation">
-                    <a className="mdl-navigation__link qtde-up" href="">
+export default React.createClass({
+    render() {
+        return <header className='mdl-layout__header mdl-layout__header--scroll header'>
+            <div className='mdl-layout__header-row'>
+                <img className='logo' src={logo} alt='logo'/>
+                <span className='mdl-layout-title'><Link to='/app' className='mdl-navigation__link'>Monitoramento</Link></span>
+                <div className='mdl-layout-spacer'></div>
+                <nav className='mdl-navigation'>
+                    <a className='mdl-navigation__link qtde-up' href=''>
                         {this.qtdeUp()}
-                        <label className="mdl-button mdl-js-button mdl-button--icon"
-                               htmlFor="fixed-header-drawer-exp">
-                            <i className="material-icons">arrow_upward</i>
+                        <label className='mdl-button mdl-js-button mdl-button--icon' htmlFor='fixed-header-drawer-exp'>
+                            <i className='material-icons'>arrow_upward</i>
                         </label>
                     </a>
-                    <a className="mdl-navigation__link qtde-down" href="">
+                    <a className='mdl-navigation__link qtde-down' href=''>
                         {this.qtdeDown()}
-                        <label className="mdl-button mdl-js-button mdl-button--icon"
-                               htmlFor="fixed-header-drawer-exp">
-                            <i className="material-icons">arrow_downward</i>
+                        <label className='mdl-button mdl-js-button mdl-button--icon' htmlFor='fixed-header-drawer-exp'>
+                            <i className='material-icons'>arrow_downward</i>
                         </label>
                     </a>
                     <Mensagens eventos={this.props.eventos} handleFechaMensagens={this.props.handleFechaMensagens}/>
                     <Menu/>
                 </nav>
             </div>
-        </header>
+        </header>;
     },
-    qtdeUp: function () {
+    qtdeUp() {
         return this.props.aplicativos.filter(function (aplicativo) {
             return aplicativo.status === 'up';
         }).length;
     },
-    qtdeDown: function () {
+    qtdeDown() {
         return this.props.aplicativos.filter(function (aplicativo) {
             return aplicativo.status !== 'up';
         }).length;
-    }
+    },
 });

@@ -1,47 +1,44 @@
-var React = require('react');
-var Mensagem = require('./mensagem');
-var _ = require('lodash');
+import React from 'react';
+import Mensagem from './mensagem';
 
-module.exports = React.createClass({
-    getInitialState: function () {
+export default React.createClass({
+    getInitialState() {
         return {
-            mostraLista: false
-        }
+            mostraLista: false,
+        };
     },
-    render: function () {
-        return <div className="mensagens">
-            <a className="mdl-navigation__link"
-               onClick={this.handleClick}
-               href="#">
+    render() {
+        return <div className='mensagens'>
+            <a className='mdl-navigation__link' onClick={this.handleClick} href='#'>
                 <div
-                    className="material-icons mdl-badge mdl-badge--overlap"
+                    className='material-icons mdl-badge mdl-badge--overlap'
                     data-badge={this.props.eventos.length}>
                     message
                 </div>
             </a>
             {this.state.mostraLista ? this.lista() : null}
-        </div>
+        </div>;
     },
-    lista: function () {
-        var count = 0;
-        var eventos = this.props.eventos.map(function (evento) {
-            return <Mensagem {...evento} key={count++}/>
+    lista() {
+        let count = 0;
+        const eventos = this.props.eventos.map(function (evento) {
+            return <Mensagem {...evento} key={count++}/>;
         });
 
-        return <div className="mdl-shadow--2dp lista-mensagens">
+        return <div className='mdl-shadow--2dp lista-mensagens'>
             <ul>
                 {eventos}
             </ul>
-            <span className="rodape">Atualizado em 26/03/2016 18:14</span>
-        </div>
+            <span className='rodape'>Atualizado em 26/03/2016 18:14</span>
+        </div>;
     },
-    handleClick: function () {
+    handleClick() {
         if (this.state.mostraLista) {
             this.props.handleFechaMensagens();
         }
 
         this.setState({
-            mostraLista: !this.state.mostraLista
+            mostraLista: !this.state.mostraLista,
         });
-    }
+    },
 });

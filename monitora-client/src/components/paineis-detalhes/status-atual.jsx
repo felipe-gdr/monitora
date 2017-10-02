@@ -1,52 +1,51 @@
-var React = require('react');
-var moment = require('moment');
-var Firebase = require('firebase');
+import React from 'react';
+import moment from 'moment';
+import Firebase from 'firebase';
+import Loading from '../loading';
+import PainelDetalhe from './painel-detalhe';
+import { ROOT_URL } from '../../constantes';
 
-var Loading = require('../loading');
-var PainelDetalhe = require('./painel-detalhe');
+const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
-var ROOT_URL = require('../../constantes').ROOT_URL;
-var eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
-
-module.exports = React.createClass({
-    getInitialState: function () {
+export default React.createClass({
+    getInitialState() {
         return {
-            eventoMaisRecente: null
+            eventoMaisRecente: null,
         };
     },
-    componentWillMount: function () {
-        var eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.aplicativo.key);
+    componentWillMount() {
+        const eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.aplicativo.key);
 
         eventosPorAplicativoRef.orderByChild('dataEvento').limitToLast(1).on('child_added', function (snap) {
             this.setState({
-                eventoMaisRecente: snap.val()
+                eventoMaisRecente: snap.val(),
             });
 
         }.bind(this));
     },
-    render: function () {
+    render() {
         return (
             <PainelDetalhe
                 rodape={this.renderDesdeStatus()}
                 status={this.props.aplicativo.status}>
                 {this.renderStatus()}
             </PainelDetalhe>
-        )
+        );
     },
-    renderStatus: function () {
+    renderStatus() {
         if (!this.state.eventoMaisRecente) {
             return <Loading/>;
         }
 
-        var desde = "a " + (moment(this.state.eventoMaisRecente.dataEvento).fromNow());
+        const desde = 'a ' + (moment(this.state.eventoMaisRecente.dataEvento).fromNow());
 
-        return <div className="titulo">
+        return <div className='titulo'>
             Status atual : {this.props.aplicativo.status} ({desde})
-        </div>
+        </div>;
     },
-    renderDesdeStatus: function () {
+    renderDesdeStatus() {
         if (this.state.eventoMaisRecente) {
-            return "desde : " + moment(this.state.eventoMaisRecente.dataEvento).format('DD/MM/YYYY HH:mm');
+            return 'desde : ' + moment(this.state.eventoMaisRecente.dataEvento).format('DD/MM/YYYY HH:mm');
         }
-    }
-})
+    },
+});

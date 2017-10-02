@@ -1,16 +1,15 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
-    render: function () {
+export default React.createClass({
+    render() {
         return (
-            <div className="showbox">
-                <div className="loader">
-                    <svg className="circular" viewBox="25 25 50 50">
-                        <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2"
-                                stroke-miterlimit="10"/>
+            <div className='showbox'>
+                <div className='loader'>
+                    <svg className='circular' viewBox='25 25 50 50'>
+                        <circle className='path' cx='50' cy='50' r='20' fill='none' strokeWidth='2' stroke-miterlimit='10'/>
                     </svg>
                 </div>
             </div>
         );
-    }
+    },
 });

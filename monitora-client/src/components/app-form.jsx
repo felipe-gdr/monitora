@@ -1,103 +1,102 @@
-var React = require('react');
-var _ = require('lodash');
+import React from 'react';
+import _ from 'lodash';
+import TextField from './text-field';
+import Botao from './botao';
 
-var TextField = require('./text-field');
-var Botao = require('./botao');
-
-module.exports = React.createClass({
-    getInitialState: function () {
+export default React.createClass({
+    getInitialState() {
         return {
             mostra: false,
             aplicativoInclusao: {
                 nome: '',
                 cliente: '',
-                url: ''
-            }
+                url: '',
+            },
         };
     },
-    render: function () {
-        return <div className="aplicativo-form">
-            <div className={"formulario" + (this.state.mostra ? '' : ' esconde')}>
-                <TextField nome="Nome x" onTextChanged={this.handleNomeChanged}/>
-                <TextField nome="Cliente x" onTextChanged={this.handleClienteChanged}/>
+    render() {
+        return <div className='aplicativo-form'>
+            <div className={'formulario' + (this.state.mostra ? '' : ' esconde')}>
+                <TextField nome='Nome x' onTextChanged={this.handleNomeChanged}/>
+                <TextField nome='Cliente x' onTextChanged={this.handleClienteChanged}/>
                 <br/>
 
-                <div className="acoes">
+                <div className='acoes'>
                     <Botao
-                        icone="done"
+                        icone='done'
                         onClick={this.handleClickSalvar}
-                        title="Salvar"
-                        cor="colored"/>
+                        title='Salvar'
+                        cor='colored'/>
                     <Botao
-                        icone="clear"
-                        title="Fechar"
+                        icone='clear'
+                        title='Fechar'
                         onClick={this.handleClickEscondeIncluir}/>
                 </div>
             </div>
-            <div className="acao-incluir">
+            <div className='acao-incluir'>
                 <Botao
-                    icone="add"
-                    title="Incluir"
-                    cor="accent"
-                    tipo="fab"
+                    icone='add'
+                    title='Incluir'
+                    cor='accent'
+                    tipo='fab'
                     onClick={this.handleClickToggleIncluir}/>
             </div>
-        </div>
+        </div>;
     },
-    renderFormulario: function () {
+    renderFormulario() {
         if (!this.state.mostra) {
             return null;
         }
 
-        return <div className="formulario">
-            <TextField nome="Nome" onTextChanged={this.handleNomeChanged}/>
-            <TextField nome="Cliente" onTextChanged={this.handleClienteChanged}/>
-            <TextField nome="Url" onTextChanged={this.handleUrlChanged}/>
-            <div className="acoes">
+        return <div className='formulario'>
+            <TextField nome='Nome' onTextChanged={this.handleNomeChanged}/>
+            <TextField nome='Cliente' onTextChanged={this.handleClienteChanged}/>
+            <TextField nome='Url' onTextChanged={this.handleUrlChanged}/>
+            <div className='acoes'>
                 <Botao
-                    icone="done"
+                    icone='done'
                     onClick={this.handleClickSalvar}
-                    title="Salvar"
-                    cor="colored"/>
+                    title='Salvar'
+                    cor='colored'/>
                 <Botao
-                    icone="clear"
-                    title="Fechar"
+                    icone='clear'
+                    title='Fechar'
                     onClick={this.handleClickEscondeIncluir}/>
             </div>
-        </div>
+        </div>;
     },
-    handleNomeChanged: function (texto) {
+    handleNomeChanged (texto) {
         this.setState(_.merge(this.state, {
             aplicativoInclusao: {
-                nome: texto
-            }
+                nome: texto,
+            },
         }));
     },
-    handleClienteChanged: function (texto) {
+    handleClienteChanged (texto) {
         this.setState(_.merge(this.state, {
             aplicativoInclusao: {
-                cliente: texto
-            }
+                cliente: texto,
+            },
         }));
     },
-    handleUrlChanged: function (texto) {
+    handleUrlChanged (texto) {
         this.setState(_.merge(this.state, {
             aplicativoInclusao: {
-                url: texto
-            }
+                url: texto,
+            },
         }));
     },
-    handleClickSalvar: function () {
+    handleClickSalvar() {
         this.props.aplicativosStore.child(this.state.aplicativoInclusao.cliente + '_' + this.state.aplicativoInclusao.nome).set(this.state.aplicativoInclusao);
     },
-    handleClickToggleIncluir: function () {
+    handleClickToggleIncluir() {
         this.setState({
-            mostra: !this.state.mostra
+            mostra: !this.state.mostra,
         });
     },
-    handleClickEscondeIncluir: function () {
+    handleClickEscondeIncluir() {
         this.setState({
-            mostra: false
+            mostra: false,
         });
-    }
+    },
 });

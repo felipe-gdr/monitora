@@ -1,37 +1,37 @@
-var React = require('react');
-var ReactFire = require('reactfire');
-var Firebase = require('firebase');
-var _ = require('lodash');
-var moment = require('moment');
+import React from 'react';
+import ReactFire from 'reactfire';
+import Firebase from 'firebase';
+// import _ from 'lodash';
+// import moment from 'moment';
 
 // Url Firebase
-var ROOT_URL = require('../constantes').ROOT_URL;
-var eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
+import { ROOT_URL } from '../constantes';
 
-var PainelDetalhe = require('./paineis-detalhes/painel-detalhe');
-var ListaEventos = require('./paineis-detalhes/lista-eventos');
-var StatusAtual = require('./paineis-detalhes/status-atual');
-var UltimaQueda = require('./paineis-detalhes/ultima-queda');
-var TempoNoAr = require('./paineis-detalhes/tempo-no-ar');
+// const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
-var OrganizaEventos = require('../servicos/organiza-eventos');
+// import PainelDetalhe from './paineis-detalhes/painel-detalhe';
+import ListaEventos from './paineis-detalhes/lista-eventos';
+import StatusAtual from './paineis-detalhes/status-atual';
+import UltimaQueda from './paineis-detalhes/ultima-queda';
+import TempoNoAr from './paineis-detalhes/tempo-no-ar';
+// import OrganizaEventos from '../servicos/organiza-eventos';
 
-module.exports = React.createClass({
+export default React.createClass({
     mixins: [ReactFire],
-    getInitialState: function () {
+    getInitialState() {
         return {aplicativo: null, eventos: [], eventosOrganizados: []};
     },
-    componentWillMount: function () {
+    componentWillMount() {
         this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
         this.bindAsObject(this.fbAplicativo, 'aplicativo');
 
         /*
-        var eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.params.app);
+        const eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.params.app);
 
-        var umaSemanaAtras = moment().subtract(7, 'day');
+        const umaSemanaAtras = moment().subtract(7, 'day');
 
         eventosPorAplicativoRef.orderByChild('dataEvento').startAt(umaSemanaAtras.toDate().getTime()).once('value', function (snap) {
-          var eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados().reverse();
+          const eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados().reverse();
 
           this.setState({
             eventosOrganizados: eventosOrganizados
@@ -40,17 +40,17 @@ module.exports = React.createClass({
         }.bind(this));
         */
     },
-    render: function () {
+    render() {
         if (!this.state.aplicativo) {
             return null;
         }
 
-        return <div className="aplicativo-estatisticas">
-            <h3 className="titulo-aplicativo">
+        return <div className='aplicativo-estatisticas'>
+            <h3 className='titulo-aplicativo'>
                 {this.state.aplicativo.cliente} {this.state.aplicativo.nome}
             </h3>
 
-            <div className="paineis-detalhes">
+            <div className='paineis-detalhes'>
                 <StatusAtual aplicativo={this.state.aplicativo}/>
 
                 <UltimaQueda app={this.props.params.app}/>
@@ -59,6 +59,6 @@ module.exports = React.createClass({
             </div>
 
             <ListaEventos app={this.props.params.app}/>
-        </div>
-    }
+        </div>;
+    },
 });

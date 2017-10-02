@@ -1,88 +1,89 @@
-var React = require('react');
-var _ = require('lodash');
+import React from 'react';
+import _ from 'lodash';
+import { Link } from 'react-router';
 
-var Link = require('react-router').Link;
-
-module.exports = React.createClass({
-    getInitialState: function () {
+export default React.createClass({
+    getInitialState() {
         return {
-            hovering: false
-        }
+            hovering: false,
+        };
     },
-    render: function () {
-        var classes = "mdl-cell mdl-cell--2-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone app-card mdl-card mdl-shadow--2dp" + (this.state.hovering ? ' ativo' : '');
+    render() {
+        const classes = 'mdl-cell mdl-cell--2-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone app-card mdl-card mdl-shadow--2dp' + (this.state.hovering ? ' ativo' : '');
 
         return <div
             className={classes}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}>
-            <Link to={'app/' + this.props.cliente + "_" + this.props.nome}>
-                <div className={"status-" + this.props.status + " mdl-card__title"}>
-                    <h4 className="mdl-card__title-text">{this.props.cliente + " : " + this.props.nome}</h4>
+            <Link to={'app/' + this.props.cliente + '_' + this.props.nome}>
+                <div className={'status-' + this.props.status + ' mdl-card__title'}>
+                    <h4 className='mdl-card__title-text'>{this.props.cliente + ' : ' + this.props.nome}</h4>
                 </div>
             </Link>
-            <div className="mdl-card__supporting-text">
+            <div className='mdl-card__supporting-text'>
                 {this.detalhes()}
             </div>
-            <div className="app-rodape mdl-card__actions mdl-card--border">
+            <div className='app-rodape mdl-card__actions mdl-card--border'>
                 Desde: {this.props.desde}
             </div>
-            <div className="mdl-card__menu">
+            <div className='mdl-card__menu'>
                 {this.cluster()}
                 {this.calculo()}
             </div>
-        </div>
+        </div>;
     },
-    detalhes: function () {
-        var versaoApp = this.props.detalhesServidor.versaoPopulis || this.props.detalhesServidor.versaoPopulisWeb
-        return <ul className="detalhes-app">
+    detalhes() {
+        const versaoApp = this.props.detalhesServidor.versaoPopulis || this.props.detalhesServidor.versaoPopulisWeb;
+
+        return <ul className='detalhes-app'>
             <li>Versao: {versaoApp}</li>
             <li>Servidor: {this.props.detalhesServidor.nomePcServidor}</li>
             <li>IP: {this.props.detalhesServidor.ipServidor}</li>
         </ul>;
     },
-    cluster: function () {
+    cluster() {
         if (this.props.cluster) {
-            var nodes = _.values(this.props.cluster).map(function (node) {
+            const nodes = _.values(this.props.cluster).map(function (node) {
                 return <div
                     key={node.nomeNode}
-                    className={"node status-" + node.status}
+                    className={'node status-' + node.status}
                     title={node.nomeNode + ' - ' + node.status}
-                />
+                />;
             });
 
-            return <div className="nodes">
+            return <div className='nodes'>
                 {nodes}
-            </div>
+            </div>;
         }
 
     },
-    calculo: function () {
-        var detalhesServidor = this.props.detalhesServidor
+    calculo() {
+        const detalhesServidor = this.props.detalhesServidor;
+
         if (detalhesServidor && detalhesServidor.calculos) {
             // Verifica se todos os serviços de cálculo estão no ar
-            var calcNoAr = detalhesServidor.calculos.every(function (c) {
+            const calcNoAr = detalhesServidor.calculos.every(function (c) {
                 // Serviços que não estão em uso não são considerados
-                return c.emUsoPopulisCalculo === 'N' || c.statusPopulisCalculo === "1"
-            })
+                return c.emUsoPopulisCalculo === 'N' || c.statusPopulisCalculo === '1';
+            });
 
-            return <div className="servico-calculo">
+            return <div className='servico-calculo'>
                 <button
-                    className="mdl-button mdl-button--icon mdl-js-button">
+                    className='mdl-button mdl-button--icon mdl-js-button'>
                     <i className={`material-icons ${calcNoAr ? '' : 'down'}`}>settings</i>
                 </button>
-            </div>
+            </div>;
         }
-        return null
+        return null;
     },
-    handleMouseEnter: function () {
+    handleMouseEnter() {
         this.setState({
-            hovering: true
+            hovering: true,
         });
     },
-    handleMouseLeave: function () {
+    handleMouseLeave() {
         this.setState({
-            hovering: false
+            hovering: false,
         });
-    }
+    },
 });

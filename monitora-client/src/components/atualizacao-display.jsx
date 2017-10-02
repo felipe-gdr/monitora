@@ -1,20 +1,20 @@
-var React = require('react');
-var Moment = require('moment');
+import React from 'react';
+import Moment from 'moment';
 
-module.exports = React.createClass({
-    componentWillMount: function () {
+export default React.createClass({
+    componentWillMount() {
         setInterval(function () {
             this.forceUpdate();
         }.bind(this), 10000);
     },
-    render: function () {
+    render() {
         if (!this.props.dataUltimaAtualizacao) {
             return <div>desconhecido</div>;
         }
 
-        return <div className="atualizacao-display">
+        return <div className='atualizacao-display'>
             Última atualizaçao: {new Moment(this.props.dataUltimaAtualizacao).fromNow()}
-        </div>
+        </div>;
 
-    }
+    },
 });

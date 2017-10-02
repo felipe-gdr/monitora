@@ -1,14 +1,13 @@
-var React = require('react');
+import React from 'react';
+import errorMp3 from '../../public/sounds/error.mp3';
+import beepMp3 from '../../public/sounds/beep.mp3';
 
-var errorMp3 = require('../../public/sounds/error.mp3');
-var beepMp3 = require('../../public/sounds/beep.mp3');
-
-module.exports = React.createClass({
-    showMessage: function (mensagem) {
-        var notificacaoContainer = document.querySelector('#notificacao');
+export default React.createClass({
+    showMessage (mensagem) {
+        const notificacaoContainer = document.querySelector('#notificacao');
 
         notificacaoContainer.MaterialSnackbar.showSnackbar({
-            message: mensagem
+            message: mensagem,
         });
 
         if (mensagem.indexOf('caiu') > -1) {
@@ -18,10 +17,10 @@ module.exports = React.createClass({
         }
 
     },
-    render: function () {
-        return <div id="notificacao" className="mdl-js-snackbar mdl-snackbar">
-            <div className="mdl-snackbar__text"></div>
-            <button className="mdl-snackbar__action" type="button"></button>
-        </div>
-    }
+    render() {
+        return <div id='notificacao' className='mdl-js-snackbar mdl-snackbar'>
+            <div className='mdl-snackbar__text'/>
+            <button className='mdl-snackbar__action' type='button'/>
+        </div>;
+    },
 });

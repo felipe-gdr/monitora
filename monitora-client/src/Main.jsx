@@ -1,74 +1,76 @@
-var React = require('react');
-var ReactFire = require('reactfire');
-var Firebase = require('firebase');
-var _ = require('lodash');
+import React from 'react';
+import ReactFire from 'reactfire';
+import Firebase from 'firebase';
+import _ from 'lodash';
 
 // Componentes
-var Favicon = require('./components/favicon');
-var Header = require('./components/header');
+import Favicon from './components/favicon';
 
-var AppForm = require('./components/app-form');
-var Notificacao = require('./components/notificacao');
+import Header from './components/header';
+import AppForm from './components/app-form';
+import Notificacao from './components/notificacao';
 
 // Url Firebase
-var ROOT_URL = require('./constantes').ROOT_URL;
+import { ROOT_URL } from './constantes';
 
 // package.json
-var version = require('../package.json').version
+import { version } from '../package.json';
 
-var eventosNovos = false;
+let eventosNovos = false;
 
-module.exports = React.createClass({
+export default React.createClass({
     mixins: [ReactFire],
-    getInitialState: function () {
+    getInitialState() {
         return {
             aplicativos: [],
             eventos: [],
-            mostraIncluir: false
-        }
+            mostraIncluir: false,
+        };
     },
-    componentWillMount: function () {
+    componentWillMount() {
         this.fbAplicativos = new Firebase(ROOT_URL + 'aplicativos/');
         this.bindAsArray(this.fbAplicativos, 'aplicativos');
 
         this.fbEventos = new Firebase(ROOT_URL + 'eventosRecentes/');
         this.fbEventos.limitToLast(10).on('child_added', this.handleEventoLoaded);
+
         // realiza uma pesquisa para separar os eventos pré-existentes dos novos
         this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
     },
-    render: function () {
-        var children = React.cloneElement(this.props.children, {aplicativos: this.state.aplicativos});
+    render() {
+        const children = React.cloneElement(this.props.children, {aplicativos: this.state.aplicativos});
 
         return <div>
             <Favicon aplicativos={this.state.aplicativos}/>
-            <div className="mdl-layout mdl-js-layout">
+            <div className='mdl-layout mdl-js-layout'>
                 <Header
                     eventos={this.state.eventos}
                     aplicativos={this.state.aplicativos}
                     handleFechaMensagens={this.handleFechaMensagens}/>
-                <main className="mdl-layout__content">
+                <main className='mdl-layout__content'>
                     {/*<AtualizacaoDisplay dataUltimaAtualizacao={this.state.dataUltimaAtualizacao}/>*/}
                     <AppForm aplicativosStore={this.firebaseRefs.aplicativos}/>
                     {children}
                 </main>
-                <footer className="footer">v. {version} </footer>
+                <footer className='footer'>v. {version} </footer>
             </div>
-            <Notificacao ref="notificacao"/>
-        </div>
+            <Notificacao ref='notificacao'/>
+        </div>;
     },
-    setItensNovos: function (snap) {
+    setItensNovos () {
         eventosNovos = true;
     },
-    handleEventoLoaded: function (snap) {
+    handleEventoLoaded (snap) {
         if (!eventosNovos) return;
 
         this.refs.notificacao.showMessage(snap.val().mensagem);
 
         this.setState({
-            dataUltimaAtualizacao: new Date()
+            dataUltimaAtualizacao: new Date(),
         });
 
-        var eventos = this.state.eventos;
+        let eventos = this.state.eventos;
+
         eventos.unshift(snap.val());
 
         if (eventos.length > 10) {
@@ -76,13 +78,12 @@ module.exports = React.createClass({
         }
 
         this.setState({
-            eventos: eventos
+            eventos: eventos,
         });
     },
-    handleFechaMensagens: function () {
+    handleFechaMensagens() {
         this.setState({
-            eventos: []
+            eventos: [],
         });
-    }
-
+    },
 });

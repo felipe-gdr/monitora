@@ -1,27 +1,27 @@
-var React = require('react');
-var AppCard = require('./app-card');
+import React from 'react';
+import AppCard from './app-card';
 
-module.exports = React.createClass({
-    render: function () {
-        return <div className="app-grid">
-            <div className="mdl-grid">
+export default React.createClass({
+    render() {
+        return <div className='app-grid'>
+            <div className='mdl-grid'>
                 {this.renderAplicativos()}
             </div>
-        </div>
+        </div>;
     },
-    renderAplicativos: function () {
-        var aplicativos = this.props.aplicativos;
+    renderAplicativos() {
+        const aplicativos = this.props.aplicativos;
 
         if (!aplicativos) {
-            return <h4 className="info">
+            return <h4 className='info'>
                 Inclua aplicativos para começar
-            </h4>
+            </h4>;
         } else {
-            var children = [];
+            const children = [];
 
-            for (var key in aplicativos) {
+            for (const key in aplicativos) {
                 if (key !== '.key') {
-                    var aplicativo = aplicativos[key];
+                    const aplicativo = aplicativos[key];
                     aplicativo.key = key;
 
                     children.push(
@@ -32,5 +32,5 @@ module.exports = React.createClass({
 
             return children;
         }
-    }
+    },
 });

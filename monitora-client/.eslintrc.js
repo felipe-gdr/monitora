@@ -1,15 +1,15 @@
 module.exports = {
     env: {
         browser: true,
-        es6: true,
+        es6: true
     },
     extends: ["eslint:recommended", "plugin:react/recommended"],
     parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
         ecmaFeatures: {
-            jsx: true,
-        },
+            jsx: true
+        }
     },
     rules: {
         'comma-dangle': ['error', 'always-multiline'],
@@ -18,6 +18,9 @@ module.exports = {
         quotes: ['error', 'single'],
         semi: ['error', 'always'],
         'no-unused-vars': ['error'],
-        'no-console': 0,
-    },
+        'no-console': 2,
+        'react/no-deprecated': 1,
+        'react/no-unknown-property': 1,
+        'react/no-string-refs': 1
+    }
 };
