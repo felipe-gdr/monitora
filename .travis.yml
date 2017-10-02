@@ -4,7 +4,7 @@ services:
 - docker
 language: node_js
 node_js:
-- 6.9.5
+- 8.5.0
 sudo: false
 cache:
   directories:
@@ -15,13 +15,12 @@ env:
   - NODE_VERSION=6.9.5
 before_install:
   - cd monitora-client
-  - npm install -g create-react-app
 install:
-  - npm install
+  - yarn install
 script:
-  - npm run test:report
+  - yarn run test:report
 after_success:
-  - npm run report-coverage
+  - yarn run report-coverage
 notifications:
   webhooks:
     on_success: change
