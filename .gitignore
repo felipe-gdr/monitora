@@ -3,3 +3,5 @@ monitora-server/node_modules
 
 monitora-server/*.log
 monitora-server/daemon/*.log
+
+.idea
