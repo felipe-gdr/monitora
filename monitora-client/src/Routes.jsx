@@ -13,14 +13,14 @@ var AppDetalhe = require('./components/app-detalhe');
 
 
 module.exports = (
-  <Router history={hashHistory}>
-    <Route path="/" component={Main}>
-      <Route path="app" component={AppGrid} />
-      <Route path="app/:app" component={AppDetalhe} />
-      <Route path="server" component={ServerGrid} />
-      <Route path="server-table" component={ServerTable} />
-      <IndexRedirect to="app" />
-    </Route>
-  </Router>
+    <Router history={hashHistory}>
+        <Route path="/" component={Main}>
+            <Route path="app" component={AppGrid}/>
+            <Route path="app/:app" component={AppDetalhe}/>
+            <Route path="server" component={ServerGrid}/>
+            <Route path="server-table" component={ServerTable}/>
+            <IndexRedirect to="app"/>
+        </Route>
+    </Router>
 
 );

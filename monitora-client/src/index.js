@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-import Routes from './Routes'
+import Routes from './Routes';
 
 import '../sass/main.css';
 

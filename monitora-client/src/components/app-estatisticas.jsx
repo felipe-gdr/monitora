@@ -17,48 +17,48 @@ var TempoNoAr = require('./paineis-detalhes/tempo-no-ar');
 var OrganizaEventos = require('../servicos/organiza-eventos');
 
 module.exports = React.createClass({
-  mixins: [ReactFire],
-  getInitialState: function () {
-    return {aplicativo: null, eventos: [], eventosOrganizados: []};
-  },
-  componentWillMount: function () {
-    this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
-    this.bindAsObject(this.fbAplicativo, 'aplicativo');
+    mixins: [ReactFire],
+    getInitialState: function () {
+        return {aplicativo: null, eventos: [], eventosOrganizados: []};
+    },
+    componentWillMount: function () {
+        this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
+        this.bindAsObject(this.fbAplicativo, 'aplicativo');
 
-    /*
-    var eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.params.app);
+        /*
+        var eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.params.app);
 
-    var umaSemanaAtras = moment().subtract(7, 'day');
+        var umaSemanaAtras = moment().subtract(7, 'day');
 
-    eventosPorAplicativoRef.orderByChild('dataEvento').startAt(umaSemanaAtras.toDate().getTime()).once('value', function (snap) {
-      var eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados().reverse();
+        eventosPorAplicativoRef.orderByChild('dataEvento').startAt(umaSemanaAtras.toDate().getTime()).once('value', function (snap) {
+          var eventosOrganizados = new OrganizaEventos(_.values(snap.val())).getEventosOrganizados().reverse();
 
-      this.setState({
-        eventosOrganizados: eventosOrganizados
-      });
+          this.setState({
+            eventosOrganizados: eventosOrganizados
+          });
 
-    }.bind(this));
-    */
-  },
-  render: function () {
-    if(!this.state.aplicativo) {
-      return null;
+        }.bind(this));
+        */
+    },
+    render: function () {
+        if (!this.state.aplicativo) {
+            return null;
+        }
+
+        return <div className="aplicativo-estatisticas">
+            <h3 className="titulo-aplicativo">
+                {this.state.aplicativo.cliente} {this.state.aplicativo.nome}
+            </h3>
+
+            <div className="paineis-detalhes">
+                <StatusAtual aplicativo={this.state.aplicativo}/>
+
+                <UltimaQueda app={this.props.params.app}/>
+
+                <TempoNoAr app={this.props.params.app}/>
+            </div>
+
+            <ListaEventos app={this.props.params.app}/>
+        </div>
     }
-
-    return <div className="aplicativo-estatisticas" >
-      <h3 className="titulo-aplicativo">
-        {this.state.aplicativo.cliente} {this.state.aplicativo.nome}
-      </h3>
-
-      <div className="paineis-detalhes">
-        <StatusAtual aplicativo={this.state.aplicativo} />
-
-        <UltimaQueda app={this.props.params.app} />
-
-        <TempoNoAr app={this.props.params.app} />
-      </div>
-
-      <ListaEventos app={this.props.params.app} />
-    </div>
-  }
 });
