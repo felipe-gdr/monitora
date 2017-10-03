@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import OrganizaServidores from '../servicos/organiza-servidores';
 
-export default React.createClass({
+export default class ServerGrid extends React.Component {
     render() {
         const servidores = new OrganizaServidores(this.props.aplicativos).getServidoresOrganizados();
         if (!servidores) {
@@ -13,9 +14,9 @@ export default React.createClass({
                 servidores.map((serv) => this.renderServidor(serv))
             }
         </div>;
-    },
+    }
 
-    renderServidor (servidor) {
+    renderServidor(servidor) {
         return <div className='mdl-cell mdl-cell--2-col' key={servidor.ip} id={servidor.ip}>
             <div className='mdl-card mdl-shadow--4dp server-card'>
                 <div className='mdl-card__title title'>
@@ -37,5 +38,9 @@ export default React.createClass({
                 </div>
             </div>
         </div>;
-    },
-});
+    }
+}
+
+ServerGrid.propTypes = {
+    aplicativos: PropTypes.array.isRequired,
+};

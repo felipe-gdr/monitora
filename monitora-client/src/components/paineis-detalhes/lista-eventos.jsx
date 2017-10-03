@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Firebase from 'firebase';
 import moment from 'moment';
 import _ from 'lodash';
@@ -12,12 +13,14 @@ const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
 const QTDE_DIAS_BUSCA = 7;
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class ListaEventos extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             eventos: [],
         };
-    },
+    }
+
     componentWillMount() {
         const eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.app);
 
@@ -32,7 +35,8 @@ export default React.createClass({
 
         }.bind(this));
 
-    },
+    }
+
     render() {
         return (
             <div className='lista-de-eventos mdl-shadow--2dp'>
@@ -42,7 +46,8 @@ export default React.createClass({
                 </ul>
             </div>
         );
-    },
+    }
+
     listaEventos() {
         if (this.state.eventos.length == 0) {
             return <div>Nenhuma novidade </div>;
@@ -51,5 +56,9 @@ export default React.createClass({
         return this.state.eventos.map(function (evento) {
             return <Mensagem {...evento} key={evento.dataEvento}/>;
         });
-    },
-});
+    }
+}
+
+ListaEventos.propTypes = {
+    app: PropTypes.string.isRequired,
+};

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default React.createClass({
+export default class TextField extends React.Component {
     render() {
         return (
             <div className='mdl-textfield mdl-js-textfield'>
@@ -16,8 +17,15 @@ export default React.createClass({
                 </label>
             </div>
         );
-    },
+    }
+
     handleInputChanged(event) {
         this.props.onTextChanged(event.target.value);
-    },
-});
+    }
+}
+
+TextField.propTypes = {
+    nome: PropTypes.string.isRequired,
+    onTextChanged: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
+};

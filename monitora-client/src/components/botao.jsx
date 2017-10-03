@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default React.createClass({
+export default class Botao extends React.Component {
     render() {
         return <button
             onClick={this.props.onClick}
@@ -8,7 +9,8 @@ export default React.createClass({
             title={this.props.title}>
             {this.renderConteudo()}
         </button>;
-    },
+    }
+
     renderConteudo() {
         let conteudo;
 
@@ -21,19 +23,30 @@ export default React.createClass({
         }
 
         return conteudo;
-    },
+    }
+
     tipo() {
         if (!this.props.tipo) {
             return ' mdl-button--raised';
         }
 
         return ' mdl-button--' + this.props.tipo;
-    },
+    }
+
     cor() {
         if (!this.props.cor) {
             return '';
         }
 
         return ' mdl-button--' + this.props.cor;
-    },
-});
+    }
+}
+
+Botao.propTypes = {
+    texto: PropTypes.string.isRequired,
+    icone: PropTypes.string.isRequired,
+    tipo: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    cor: PropTypes.string.isRequired,
+};

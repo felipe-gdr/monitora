@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default React.createClass({
+export default class Menu extends React.Component {
     render() {
         return (
             <div className='menu'>
@@ -29,5 +29,5 @@ export default React.createClass({
                 </ul>
             </div>
         );
-    },
-});
+    }
+}

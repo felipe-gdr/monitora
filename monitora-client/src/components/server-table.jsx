@@ -1,23 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import OrganizaServidores from '../servicos/organiza-servidores';
 
-export default React.createClass({
-    getInitialState() {
-        return {appsFiltrados: []};
-    },
+export default class ServerTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            appsFiltrados: [],
+        };
+    }
 
     componentDidMount() {
         const apps = new OrganizaServidores(this.props.aplicativos).getListaAplicativos();
 
         this.setState({appsFiltrados: apps, appsTodos: apps});
-    },
+    }
 
     componentWillReceiveProps() {
         const apps = new OrganizaServidores(this.props.aplicativos).getListaAplicativos();
 
         this.setState({appsFiltrados: apps, appsTodos: apps});
-    },
+    }
 
     applyFilters() {
         const ip = document.querySelector('#ip').value,
@@ -49,7 +53,7 @@ export default React.createClass({
         }
 
         this.setState({appsFiltrados});
-    },
+    }
 
     render() {
         const {appsFiltrados, appsTodos} = this.state;
@@ -127,9 +131,9 @@ export default React.createClass({
                 </table>
             </div>
         );
-    },
+    }
 
-    renderAplicativo (app) {
+    renderAplicativo(app) {
         const servidor = app.nomeServidor ? `${app.ip} (${app.nomeServidor})` : app.ip;
 
         return (
@@ -150,9 +154,13 @@ export default React.createClass({
                 <td className='mdl-data-table__cell--non-numeric'>
                     <div
                         title={app.status}
-                        className={'status ' + app.status}></div>
+                        className={'status ' + app.status}/>
                 </td>
             </tr>
         );
-    },
-});
+    }
+}
+
+ServerTable.propTypes = {
+    aplicativos: PropTypes.array.isRequired,
+};

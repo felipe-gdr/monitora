@@ -2,8 +2,8 @@ import React from 'react';
 import errorMp3 from '../../public/sounds/error.mp3';
 import beepMp3 from '../../public/sounds/beep.mp3';
 
-export default React.createClass({
-    showMessage (mensagem) {
+export default class Notificacao extends React.Component {
+    showMessage(mensagem) {
         const notificacaoContainer = document.querySelector('#notificacao');
 
         notificacaoContainer.MaterialSnackbar.showSnackbar({
@@ -16,11 +16,12 @@ export default React.createClass({
             new Audio(beepMp3).play();
         }
 
-    },
+    }
+
     render() {
         return <div id='notificacao' className='mdl-js-snackbar mdl-snackbar'>
             <div className='mdl-snackbar__text'/>
             <button className='mdl-snackbar__action' type='button'/>
         </div>;
-    },
-});
+    }
+}

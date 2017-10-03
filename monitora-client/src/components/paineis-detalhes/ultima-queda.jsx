@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Firebase from 'firebase';
 import moment from 'moment';
 import _ from 'lodash';
@@ -8,14 +9,16 @@ import { ROOT_URL } from '../../constantes';
 
 const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class UltimaQueda extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             duracaoUltimaQueda: 0,
             dataUltimaQueda: null,
             loading: true,
         };
-    },
+    }
+
     componentWillMount() {
         const eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.app);
 
@@ -42,7 +45,8 @@ export default React.createClass({
 
         }.bind(this));
 
-    },
+    }
+
     render() {
         if (this.state.loading) {
             return (
@@ -69,5 +73,9 @@ export default React.createClass({
                 </div>
             </PainelDetalhe>
         );
-    },
-});
+    }
+}
+
+UltimaQueda.propTypes = {
+    app: PropTypes.string.isRequired,
+};

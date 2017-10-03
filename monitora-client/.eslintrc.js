@@ -14,15 +14,16 @@ module.exports = {
     },
     rules: {
         'comma-dangle': ['error', 'always-multiline'],
-        indent: ['error', 4],
+        'indent': ['error', 4],
         'linebreak-style': ['error', 'unix'],
-        quotes: ['error', 'single'],
-        semi: ['error', 'always'],
+        'quotes': ['error', 'single'],
+        'semi': ['error', 'always'],
         'no-unused-vars': ['error'],
-        'no-console': 2,
         'react/no-deprecated': 1,
         'react/no-unknown-property': 1,
-        'react/no-string-refs': 1
+        'react/no-string-refs': 1,
+        'react/prop-types': 2,
+        'react/display-name': 2
     },
     globals: {
         describe: true,

@@ -1,16 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Mensagens from './mensagens';
 import { Link } from 'react-router';
 import logo from '../../public/images/monitora-down.png';
 import Menu from './menu';
 
-export default React.createClass({
+export default class Header extends React.Component {
     render() {
         return <header className='mdl-layout__header mdl-layout__header--scroll header'>
             <div className='mdl-layout__header-row'>
                 <img className='logo' src={logo} alt='logo'/>
                 <span className='mdl-layout-title'><Link to='/app' className='mdl-navigation__link'>Monitoramento</Link></span>
-                <div className='mdl-layout-spacer'></div>
+                <div className='mdl-layout-spacer'/>
                 <nav className='mdl-navigation'>
                     <a className='mdl-navigation__link qtde-up' href=''>
                         {this.qtdeUp()}
@@ -29,15 +30,23 @@ export default React.createClass({
                 </nav>
             </div>
         </header>;
-    },
+    }
+
     qtdeUp() {
         return this.props.aplicativos.filter(function (aplicativo) {
             return aplicativo.status === 'up';
         }).length;
-    },
+    }
+
     qtdeDown() {
         return this.props.aplicativos.filter(function (aplicativo) {
             return aplicativo.status !== 'up';
         }).length;
-    },
-});
+    }
+}
+
+Header.propTypes = {
+    aplicativos: PropTypes.array.isRequired,
+    eventos: PropTypes.array.isRequired,
+    handleFechaMensagens: PropTypes.func.isRequired,
+};

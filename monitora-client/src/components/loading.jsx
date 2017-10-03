@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default React.createClass({
+export default class Loading extends React.Component {
     render() {
         return (
             <div className='showbox'>
@@ -11,5 +11,5 @@ export default React.createClass({
                 </div>
             </div>
         );
-    },
-});
+    }
+}

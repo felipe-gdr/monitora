@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import TextField from './text-field';
 import Botao from './botao';
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class AppForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             mostra: false,
             aplicativoInclusao: {
                 nome: '',
@@ -13,7 +15,8 @@ export default React.createClass({
                 url: '',
             },
         };
-    },
+    }
+
     render() {
         return <div className='aplicativo-form'>
             <div className={'formulario' + (this.state.mostra ? '' : ' esconde')}>
@@ -42,7 +45,8 @@ export default React.createClass({
                     onClick={this.handleClickToggleIncluir}/>
             </div>
         </div>;
-    },
+    }
+
     renderFormulario() {
         if (!this.state.mostra) {
             return null;
@@ -64,39 +68,49 @@ export default React.createClass({
                     onClick={this.handleClickEscondeIncluir}/>
             </div>
         </div>;
-    },
-    handleNomeChanged (texto) {
+    }
+
+    handleNomeChanged(texto) {
         this.setState(_.merge(this.state, {
             aplicativoInclusao: {
                 nome: texto,
             },
         }));
-    },
-    handleClienteChanged (texto) {
+    }
+
+    handleClienteChanged(texto) {
         this.setState(_.merge(this.state, {
             aplicativoInclusao: {
                 cliente: texto,
             },
         }));
-    },
-    handleUrlChanged (texto) {
+    }
+
+    handleUrlChanged(texto) {
         this.setState(_.merge(this.state, {
             aplicativoInclusao: {
                 url: texto,
             },
         }));
-    },
+    }
+
     handleClickSalvar() {
         this.props.aplicativosStore.child(this.state.aplicativoInclusao.cliente + '_' + this.state.aplicativoInclusao.nome).set(this.state.aplicativoInclusao);
-    },
+    }
+
     handleClickToggleIncluir() {
         this.setState({
             mostra: !this.state.mostra,
         });
-    },
+    }
+
     handleClickEscondeIncluir() {
         this.setState({
             mostra: false,
         });
-    },
-});
+    }
+}
+
+AppForm.propTypes = {
+    aplicativosStore: PropTypes.object.isRequired,
+};

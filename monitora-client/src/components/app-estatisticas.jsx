@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import ReactFire from 'reactfire';
 import Firebase from 'firebase';
 // import _ from 'lodash';
 // import moment from 'moment';
 
 // Url Firebase
-import { ROOT_URL } from '../constantes';
+import {ROOT_URL} from '../constantes';
 
 // const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
@@ -16,11 +18,17 @@ import UltimaQueda from './paineis-detalhes/ultima-queda';
 import TempoNoAr from './paineis-detalhes/tempo-no-ar';
 // import OrganizaEventos from '../servicos/organiza-eventos';
 
-export default React.createClass({
+export default createReactClass({
+    displayName: 'app-estatisticas',
     mixins: [ReactFire],
+    propTypes: {
+        params: PropTypes.object.isRequired,
+    },
+
     getInitialState() {
         return {aplicativo: null, eventos: [], eventosOrganizados: []};
     },
+
     componentWillMount() {
         this.fbAplicativo = new Firebase(ROOT_URL + 'aplicativos/' + this.props.params.app);
         this.bindAsObject(this.fbAplicativo, 'aplicativo');
@@ -40,6 +48,7 @@ export default React.createClass({
         }.bind(this));
         */
     },
+
     render() {
         if (!this.state.aplicativo) {
             return null;
@@ -62,3 +71,4 @@ export default React.createClass({
         </div>;
     },
 });
+

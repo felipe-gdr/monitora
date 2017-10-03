@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default React.createClass({
+export default class PainelDetalhe extends React.Component {
     render() {
         return <div className='painel-detalhe'>
             <div className='mdl-card mdl-shadow--2dp'>
@@ -12,5 +13,11 @@ export default React.createClass({
                 </div>
             </div>
         </div>;
-    },
-});
+    }
+}
+
+PainelDetalhe.propTypes = {
+    status: PropTypes.string.isRequired,
+    rodape: PropTypes.element.isRequired,
+    children: PropTypes.element.isRequired,
+};

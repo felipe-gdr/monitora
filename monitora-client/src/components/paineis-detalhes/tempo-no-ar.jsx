@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
 import Firebase from 'firebase';
@@ -11,15 +12,17 @@ const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
 const QTDE_DIAS_BUSCA = 7;
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class TempoNoAr extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             porcentagemUp: 0,
             porcentagemInstavel: 0,
             porcentagemDown: 0,
             loading: true,
         };
-    },
+    }
+
     componentWillMount() {
         const eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.app);
         const periodoBusca = moment().subtract(QTDE_DIAS_BUSCA, 'day').toDate().getTime();
@@ -54,7 +57,8 @@ export default React.createClass({
                 loading: false,
             });
         }.bind(this));
-    },
+    }
+
     render() {
         if (this.state.loading) {
             return ( <PainelDetalhe><Loading/></PainelDetalhe>);
@@ -87,5 +91,9 @@ export default React.createClass({
                 </div>
             </PainelDetalhe>
         );
-    },
-});
+    }
+}
+
+TempoNoAr.propTypes = {
+    app: PropTypes.object.isRequired,
+};

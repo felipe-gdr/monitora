@@ -1,13 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import _ from 'lodash';
 import { Link } from 'react-router';
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class AppCard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             hovering: false,
         };
-    },
+    }
+
     render() {
         const classes = 'mdl-cell mdl-cell--2-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone app-card mdl-card mdl-shadow--2dp' + (this.state.hovering ? ' ativo' : '');
 
@@ -31,7 +35,8 @@ export default React.createClass({
                 {this.calculo()}
             </div>
         </div>;
-    },
+    }
+
     detalhes() {
         const versaoApp = this.props.detalhesServidor.versaoPopulis || this.props.detalhesServidor.versaoPopulisWeb;
 
@@ -40,7 +45,8 @@ export default React.createClass({
             <li>Servidor: {this.props.detalhesServidor.nomePcServidor}</li>
             <li>IP: {this.props.detalhesServidor.ipServidor}</li>
         </ul>;
-    },
+    }
+
     cluster() {
         if (this.props.cluster) {
             const nodes = _.values(this.props.cluster).map(function (node) {
@@ -56,7 +62,8 @@ export default React.createClass({
             </div>;
         }
 
-    },
+    }
+
     calculo() {
         const detalhesServidor = this.props.detalhesServidor;
 
@@ -75,15 +82,26 @@ export default React.createClass({
             </div>;
         }
         return null;
-    },
+    }
+
     handleMouseEnter() {
         this.setState({
             hovering: true,
         });
-    },
+    }
+
     handleMouseLeave() {
         this.setState({
             hovering: false,
         });
-    },
-});
+    }
+}
+
+AppCard.propTypes = {
+    nome: PropTypes.string.isRequired,
+    cliente: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    desde: PropTypes.string.isRequired,
+    detalhesServidor: PropTypes.object.isRequired,
+    cluster: PropTypes.object.isRequired,
+};

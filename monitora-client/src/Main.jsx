@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import ReactFire from 'reactfire';
 import Firebase from 'firebase';
 import _ from 'lodash';
@@ -18,8 +20,13 @@ import { version } from '../package.json';
 
 let eventosNovos = false;
 
-export default React.createClass({
+export default createReactClass({
+    displayName: 'Main',
     mixins: [ReactFire],
+    propTypes: {
+        children: PropTypes.array.isRequired,
+    },
+
     getInitialState() {
         return {
             aplicativos: [],
@@ -27,6 +34,7 @@ export default React.createClass({
             mostraIncluir: false,
         };
     },
+
     componentWillMount() {
         this.fbAplicativos = new Firebase(ROOT_URL + 'aplicativos/');
         this.bindAsArray(this.fbAplicativos, 'aplicativos');
@@ -37,6 +45,7 @@ export default React.createClass({
         // realiza uma pesquisa para separar os eventos pré-existentes dos novos
         this.fbEventos.limitToLast(1).once('value', this.setItensNovos);
     },
+
     render() {
         const children = React.cloneElement(this.props.children, {aplicativos: this.state.aplicativos});
 
@@ -57,9 +66,11 @@ export default React.createClass({
             <Notificacao ref='notificacao'/>
         </div>;
     },
+
     setItensNovos () {
         eventosNovos = true;
     },
+
     handleEventoLoaded (snap) {
         if (!eventosNovos) return;
 
@@ -81,6 +92,7 @@ export default React.createClass({
             eventos: eventos,
         });
     },
+
     handleFechaMensagens() {
         this.setState({
             eventos: [],

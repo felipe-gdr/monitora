@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-export default React.createClass({
+export default class AppDetalhe extends React.Component {
     render() {
         const aplicativo = _.find(this.props.aplicativos, {'.key': this.props.params.app});
 
@@ -18,9 +19,9 @@ export default React.createClass({
             </h6>
             {this.renderDetalhes(aplicativo)}
         </div>;
-    },
+    }
 
-    renderDetalhes (aplicativo) {
+    renderDetalhes(aplicativo) {
         const detalhes = aplicativo.detalhesServidor;
         const versaoWeb = detalhes.versaoPopulisWeb || (detalhes.versaoPopulis + '_' + detalhes.numeroBuild);
 
@@ -47,9 +48,9 @@ export default React.createClass({
                 {this.renderCluster(aplicativo)}
             </div>
         );
-    },
+    }
 
-    renderCalculo (aplicativo) {
+    renderCalculo(aplicativo) {
         const detalhes = aplicativo.detalhesServidor;
 
         if (!detalhes || !detalhes.calculos) {
@@ -104,9 +105,9 @@ export default React.createClass({
                 </div>
             </div>
         );
-    },
+    }
 
-    renderCluster (aplicativo) {
+    renderCluster(aplicativo) {
         const cluster = aplicativo.cluster;
 
         if (!cluster) {
@@ -166,5 +167,10 @@ export default React.createClass({
 
             </div>
         );
-    },
-});
+    }
+}
+
+AppDetalhe.propTypes = {
+    aplicativos: PropTypes.array.isRequired,
+    params: PropTypes.object.isRequired,
+};

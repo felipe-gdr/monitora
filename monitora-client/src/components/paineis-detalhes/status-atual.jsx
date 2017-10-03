@@ -1,18 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import Firebase from 'firebase';
 import Loading from '../loading';
 import PainelDetalhe from './painel-detalhe';
-import { ROOT_URL } from '../../constantes';
+import {ROOT_URL} from '../../constantes';
 
 const eventosPorAplicativoUrl = ROOT_URL + 'eventosPorAplicativo';
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class StatusAtual extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             eventoMaisRecente: null,
         };
-    },
+    }
+
     componentWillMount() {
         const eventosPorAplicativoRef = new Firebase(eventosPorAplicativoUrl + '/' + this.props.aplicativo.key);
 
@@ -22,7 +25,8 @@ export default React.createClass({
             });
 
         }.bind(this));
-    },
+    }
+
     render() {
         return (
             <PainelDetalhe
@@ -31,7 +35,8 @@ export default React.createClass({
                 {this.renderStatus()}
             </PainelDetalhe>
         );
-    },
+    }
+
     renderStatus() {
         if (!this.state.eventoMaisRecente) {
             return <Loading/>;
@@ -42,10 +47,15 @@ export default React.createClass({
         return <div className='titulo'>
             Status atual : {this.props.aplicativo.status} ({desde})
         </div>;
-    },
+    }
+
     renderDesdeStatus() {
         if (this.state.eventoMaisRecente) {
             return 'desde : ' + moment(this.state.eventoMaisRecente.dataEvento).format('DD/MM/YYYY HH:mm');
         }
-    },
-});
+    }
+}
+
+StatusAtual.propTypes = {
+    aplicativo: PropTypes.object.isRequired,
+};
