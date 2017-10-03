@@ -23,5 +23,12 @@ module.exports = {
         'react/no-deprecated': 1,
         'react/no-unknown-property': 1,
         'react/no-string-refs': 1
+    },
+    globals: {
+        describe: true,
+        it: true,
+        test: true,
+        beforeEach: true,
+        expect: true
     }
 };
