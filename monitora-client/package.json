@@ -57,7 +57,8 @@
     "test:report": "jest --coverage",
     "watch-css": "npm run build-css && node-sass sass/main.scss -o sass/ --watch --recursive",
     "lint:js": "eslint src/ --cache --ext .js --ext .jsx",
-    "lint:tests": "eslint tests/ --cache --ext .js"
+    "lint:tests": "eslint tests/ --cache --ext .js",
+    "postinstall": "npm run build"
   },
   "czConfig": {
     "path": "monitora-client/node_modules/cz-conventional-changelog"
